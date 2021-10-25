@@ -8,7 +8,7 @@ go 训练营
 
 
 #### 安装教程
-- [第一周课件](victorfengming.gitee.io/file/pdf/golang/geekbang/camp00/week01.pdf)
+- [第一周课件](http://victorfengming.gitee.io/file/pdf/golang/geekbang/camp00/week01.pdf)
 
 #### 使用说明
 
