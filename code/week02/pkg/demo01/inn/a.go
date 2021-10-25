@@ -1,5 +1,5 @@
 package inn
 
 func A() error {
-	return C()
+	return B()
 }
