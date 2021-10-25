@@ -214,7 +214,69 @@ if err != nil{
 
 
 
-
-
 从顶层到底层,底层报错,返回err,顶层拿不到 报错行数
+
+
+
+
+
+---
+
+## Wrap Errors
+
+使用 `github.com/pkg/errors` 这个包 
+
+来对于 error进行包装
+
+```go
+_,err = w.Write(buf)
+
+return errors.Wrap(err,"this is extend info of error by victor")
+```
+
+不计日志,一层层往外面抛出
+
+可以在定义的中间件中统一进行处理
+
+
+
+如果处理过了,就不要在往上抛
+
+
+
+wrap errors 这个不可能会出现在标准库里面
+
+# Go 1.13
+
+
+
+go1.13 里面 添加了 Is方法,你可以自定义Is方法,
+
+在里面实现 类型的判断,可以自定义一些业务逻辑的判定
+
+而官方的1.13里面是 在Is底层里进行不断的UnWrap()进行展开,判断 根因的报错信息与预定义的Sentinel值是否一样
+
+
+
+pkg/errors 中的Wrapf和 error兼容,儿error里面没有堆栈信息
+
+所以目前可以推荐使用errors
+
+
+
+go1.x版本需要向下兼容,所以还是没有什么大的更改
+
+go2.x可能会有更加好的方式来处理吧
+
+
+
+---
+
+
+
+go 2里 , 设计 check 等关键字来进行重新设计
+
+(在起草过程)
+
+
 
