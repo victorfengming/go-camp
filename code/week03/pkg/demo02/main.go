@@ -11,6 +11,6 @@ func main() {
 	}()
 	<-c
 	fmt.Println("Done!")
-
 	// BUG: 为什么
+
 }
