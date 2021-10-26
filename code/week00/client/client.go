@@ -19,33 +19,8 @@ func main() {
 	}
 	fmt.Print(msg)
 	SetFuncField(h)
-	h.FuncField()
+	_, _ = h.FuncField("nancy")
 
-}
-
-// 远程调用的本质
-//
-
-func inn(addr string) func() {
-	return func() {
-		// 匿名函数
-		fmt.Printf("change method begin\n")
-		client := http.Client{}
-		//resp, err := client.Get("http://localhost:8080/golang")
-		resp, err := client.Get(addr)
-		if err != nil {
-			log.Fatalf("%s", err)
-			//return "", err
-		}
-		data, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			log.Fatalf("%s", err)
-			//return "", err
-		}
-		print(data)
-		//return string(data), nil
-		fmt.Printf("change method end\n")
-	}
 }
 
 // val interface{} >>> java 的 Object对象
@@ -59,15 +34,59 @@ func SetFuncField(val interface{}) {
 	for i := 0; i < num; i++ {
 		f := ele.Field(i)
 		if f.CanSet() {
-			f.Set(
-				reflect.ValueOf(inn("http://localhost:8080/golang2")))
-			// todo 匿名函数如何传递参数
-			//"http://localhost:8080/golang"
+			fn := func(args []reflect.Value) (results []reflect.Value) {
+				name := args[0].Interface().(string)
+				fmt.Printf("change method begin\n")
+				client := http.Client{}
+				resp, err := client.Get("http://localhost:8080/" + name)
+				//resp, err := client.Get(addr)
+				if err != nil {
+					return []reflect.Value{
+						reflect.ValueOf(""),
+						reflect.Zero(reflect.TypeOf(err)),
+					}
+				}
+				data, err := ioutil.ReadAll(resp.Body)
+
+				if err != nil {
+					return []reflect.Value{
+						reflect.ValueOf(""),
+						reflect.Zero(reflect.TypeOf(err)),
+					}
+				}
+				fmt.Printf("change method end\n")
+				return []reflect.Value{
+					reflect.ValueOf(string(data)),
+					reflect.Zero(reflect.TypeOf(new(error)).Elem()),
+				}
+			}
+
+			f.Set(reflect.MakeFunc(f.Type(), fn))
 		}
-		//m := t.Method(i)
-		//fmt.Println(m.Name)
 	}
-	//t.MethodByName()
+}
+
+func inn(addr string) func() ([]byte, error) {
+	return func() ([]byte, error) {
+		// 匿名函数
+		fmt.Printf("change method begin\n")
+		client := http.Client{}
+		//resp, err := client.Get("http://localhost:8080/golang")
+		resp, err := client.Get(addr)
+		if err != nil {
+			log.Fatalf("%s", err)
+			return nil, err
+		}
+		data, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalf("%s", err)
+			return nil, err
+		}
+		//print(data)
+		//return string(data), nil
+		fmt.Printf("change method end\n")
+		return data, nil
+	}
 }
 
 type HelloService interface {
@@ -77,7 +96,7 @@ type HelloService interface {
 type hello struct {
 	endpoint string
 	// 只能改这个
-	FuncField func()
+	FuncField func(name string) (string, error)
 }
 
 func (h hello) SayHello(name string) (string, error) {
