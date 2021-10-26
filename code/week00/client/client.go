@@ -60,7 +60,6 @@ func SetFuncField(val interface{}) {
 					reflect.Zero(reflect.TypeOf(new(error)).Elem()),
 				}
 			}
-
 			f.Set(reflect.MakeFunc(f.Type(), fn))
 		}
 	}
@@ -97,20 +96,13 @@ type hello struct {
 	endpoint string
 	// 只能改这个
 	FuncField func(name string) (string, error)
+	//getUser GetUser(req *UserReq)(*User,error)
 }
 
 func (h hello) SayHello(name string) (string, error) {
-	client := http.Client{}
-	resp, err := client.Get(h.endpoint + name)
-	if err != nil {
-		log.Fatalf("%s", err)
-		return "", err
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalf("%s", err)
-		return "", err
-	}
-	return string(data), nil
+	return "", nil
+}
 
+func (h hello) GetOrder(name string) (string, error) {
+	return "", nil
 }
