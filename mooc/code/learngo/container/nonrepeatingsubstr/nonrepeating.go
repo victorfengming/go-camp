@@ -1,12 +1,13 @@
 package nonrepeatingsubstr
 
+var lastOccurred = make([]int, 0xffff)
+
 func lengthOfNonRepeatingSubStr(s string) int {
 	//lastOccurred := make(map[rune]int)
-	// 用空间换时间
+	// 用空间换时间 开了65k的内存(巨大的内存)
 	// 中文的大小 0xffff 大概够了
 	//rune 是 int32 其实是
 
-	lastOccurred := make([]int, 0xffff)
 	for i := range lastOccurred {
 		lastOccurred[i] = -1
 	}

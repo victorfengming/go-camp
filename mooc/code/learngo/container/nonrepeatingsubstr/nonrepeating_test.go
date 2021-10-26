@@ -57,4 +57,20 @@ func BenchmarkSubstr(b *testing.B) {
 	Process finished with the exit code 0
 
 	*/
+
+	// 优化了一点点
+	/**
+	goos: windows
+	goarch: amd64
+	pkg: learngo/container/nonrepeatingsubstr
+	cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+	BenchmarkSubstr
+	    nonrepeating_test.go:22: len() =- 491520
+	    nonrepeating_test.go:22: len() =- 491520
+	    nonrepeating_test.go:22: len() =- 491520
+	BenchmarkSubstr-12    	     703	   1713670 ns/op
+	PASS
+
+	Process finished with the exit code 0
+	*/
 }
