@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	var h HelloService = hello{
+	var h = &hello{
 		endpoint: "http://localhost:8080/",
 	}
 	msg, err := h.SayHello("够浪")
@@ -18,7 +18,36 @@ func main() {
 		return
 	}
 	fmt.Print(msg)
-	PrintFuncName(h)
+	SetFuncField(h)
+	h.FuncField()
+
+}
+
+// 远程调用的本质
+//
+
+// val interface{} >>> java 的 Object对象
+// 跟对象
+func SetFuncField(val interface{}) {
+	//t:= reflect.TypeOf(val)
+	v := reflect.ValueOf(val) // zhizhen指针的反射
+	ele := v.Elem()           // 指针指向的结构体
+	t := ele.Type()           // 指针指向的结构体的类型信息
+	num := t.NumField()       // 方法数量
+	for i := 0; i < num; i++ {
+		f := ele.Field(i)
+		if f.CanSet() {
+			f.Set(
+				reflect.ValueOf(
+					func() {
+						// 匿名函数
+						fmt.Printf("这是篡改的方法")
+					}))
+		}
+		//m := t.Method(i)
+		//fmt.Println(m.Name)
+	}
+	//t.MethodByName()
 }
 
 type HelloService interface {
@@ -26,7 +55,8 @@ type HelloService interface {
 }
 
 type hello struct {
-	endpoint  string
+	endpoint string
+	// 只能改这个
 	FuncField func()
 }
 
@@ -60,24 +90,4 @@ func (h hello) GetOrder(name string) (string, error) {
 	}
 	return string(data), nil
 
-}
-
-// 远程调用的本质
-//
-
-// val interface{} >>> java 的 Object对象
-// 跟对象
-func PrintFuncName(val interface{}) {
-	t := reflect.TypeOf(val)
-	t2 := reflect.ValueOf(val)
-	num := t.NumMethod()
-	for i := 0; i < num; i++ {
-		f := t2.Field(i)
-		if f.CanSet() {
-			fmt.Println("aaa")
-		}
-		m := t.Method(i)
-		fmt.Println(m.Name)
-	}
-	//t.MethodByName()
 }
