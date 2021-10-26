@@ -9,7 +9,6 @@ import (
 func index(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println(HelloWorld(request.Method))
 	fmt.Println("req>Path>", request.URL.Path)
-	fmt.Println("req>Path>", request.URL.Path)
 	fmt.Fprintf(writer, "IT Works")
 }
 
@@ -21,5 +20,5 @@ func main() {
 }
 
 func HelloWorld(name string) string {
-	return name + "heee"
+	return name + "over"
 }
