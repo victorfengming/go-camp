@@ -49,3 +49,18 @@ func (h hello) GetOrder(name string) (string, error) {
 > HTTP 协议 而 RPC是一种理念
 
 ![1635215288948](README/1635215288948.png)
+
+
+
+看来我们需要一个指针
+
+![1635216252902](README/1635216252902.png)
+
+与Java对比,没有构造函数
+
+
+
+![1635216284128](README/1635216284128.png)
+
+![1635216385897](README/1635216385897.png)
+

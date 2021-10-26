@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"reflect"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 		return
 	}
 	fmt.Print(msg)
-
+	PrintFuncName(h)
 }
 
 type HelloService interface {
@@ -25,7 +26,8 @@ type HelloService interface {
 }
 
 type hello struct {
-	endpoint string
+	endpoint  string
+	FuncField func()
 }
 
 func (h hello) SayHello(name string) (string, error) {
@@ -62,3 +64,34 @@ func (h hello) GetOrder(name string) (string, error) {
 
 // 远程调用的本质
 //
+
+// val interface{} >>> java 的 Object对象
+// 跟对象
+func PrintFuncName(val interface{}) {
+	t := reflect.TypeOf(val)
+	t2 := reflect.ValueOf(val)
+	num := t.NumMethod()
+	for i := 0; i < num; i++ {
+		f := t2.Field(i)
+		if f.CanSet() {
+			fmt.Println("aaa")
+		}
+		m := t.Method(i)
+		fmt.Println(m.Name)
+	}
+	//t.MethodByName()
+}
+
+type User struct {
+	Name string
+	Age  int
+}
+
+func (u User) ChangeName(newName string) {
+	u.Name = newName
+}
+
+func (u User) ChangeAge(newAge int) {
+	u.Age = newAge
+
+}
