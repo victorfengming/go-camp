@@ -265,3 +265,39 @@ Process finished with the exit code 0
 
 
 # 4-6生成文档和示例代码.mp4
+
+
+
+```go
+godoc -http :6060
+```
+
+
+
+
+
+```go
+package queue
+
+import "fmt"
+
+func ExampleQueue_Pop() {
+	q := Queue{1}
+	q.Push(2)
+	q.Push(3)
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+	fmt.Println(q.IsEmpty())
+	fmt.Println(q.Pop())
+	fmt.Println(q.IsEmpty())
+
+	// Output:
+	// 1
+	// 2
+	// false
+	// 3
+	// true
+}
+
+```
+
