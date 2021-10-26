@@ -92,8 +92,11 @@ go tool pprof -cpuprofile cpu.out
 
 
 
-
 # 4-4测试http服务器（上）.mp4
+
+
+
+![1635253212575](README/1635253212575.png)
 
 
 # 4-5测试http服务器（下）.mp4

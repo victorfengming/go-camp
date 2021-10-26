@@ -1,7 +1,6 @@
 package main
 
 import (
-	log "github.com/sirupsen/logrus"
 	"learngo/errhandling/file_listing_server/file_listing"
 	//"io/ioutil"
 	"net/http"
@@ -24,15 +23,14 @@ func errWrapper(handler appHandler) func(writer http.ResponseWriter, request *ht
 		// panic
 		defer func() {
 			if r := recover(); r != nil {
-				log.Printf("Painic: %v", r)
+				//log.Printf("Panic: %v", r)
 				http.Error(writer, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 			}
 		}()
 		err := handler(writer, request)
 		if err != nil {
 			// panic
-			log.Warn("Error handling request:%s"+
-				"", err.Error())
+			//log.Warn("Error handling request", err.Error())
 			// user error
 			if userErr, ok := err.(userError); ok {
 				http.Error(writer, userErr.Message(), http.StatusBadRequest)
