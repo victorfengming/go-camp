@@ -31,7 +31,169 @@ func writeFile(filename string){
 
 ![1635231971395](README/1635231971395.png)
 
+
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func tryDefer() {
+	defer fmt.Println(2)
+	defer fmt.Println(1)
+
+	fmt.Println(3)
+	fmt.Println(4)
+}
+
+func writeFile(filename string) {
+	file, err := os.Create(filename)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	defer writer.Flush()
+
+	for i := 0; i < 20; i++ {
+		fmt.Fprintln(writer, i)
+	}
+}
+
+func main() {
+	writeFile("fib.txt")
+}
+
+```
+
+
+
 # 3-2 错误处理概念.mp4
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func tryDefer() {
+	defer fmt.Println(2)
+	defer fmt.Println(1)
+
+	fmt.Println(3)
+	fmt.Println(4)
+}
+
+func writeFile(filename string) {
+	file, err := os.Create(filename)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	defer writer.Flush()
+
+	for i := 0; i < 20; i++ {
+		fmt.Fprintln(writer, i)
+	}
+}
+
+func writeFile2(filename string) {
+	file, err := os.OpenFile(
+		filename, os.O_EXCL|os.O_CREATE, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	defer writer.Flush()
+
+	for i := 0; i < 20; i++ {
+		fmt.Fprintln(writer, i)
+	}
+}
+
+func main() {
+	writeFile2("fib.txt")
+	/**
+	panic: open fib.txt: The file exists.
+
+	goroutine 1 [running]:
+	main.writeFile2({0xf7b58, 0xc000040000})
+		E:/Projects/GolandProjects/go-camp/mooc/code/learngo/errhandling/defer/defer.go:35 +0x1d5
+	main.main()
+		E:/Projects/GolandProjects/go-camp/mooc/code/learngo/errhandling/defer/defer.go:47 +0x25
+
+	Process finished with the exit code 2
+	 */
+}
+
+```
+
+
+
+
+
+> 如果文件存在就报错
+
+可以处理一下
+
+```go
+func writeFile2(filename string) {
+	file, err := os.OpenFile(
+		filename, os.O_EXCL|os.O_CREATE, 0666)
+	if err != nil {
+		fmt.Println("flie already exist!!!")
+		return
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	defer writer.Flush()
+
+	for i := 0; i < 20; i++ {
+		fmt.Fprintln(writer, i)
+	}
+}
+```
+
+
+
+> 真正的处理错误
+
+```go
+func writeFile2(filename string) {
+	file, err := os.OpenFile(
+		filename, os.O_EXCL|os.O_CREATE, 0666)
+	if err != nil {
+		if pathError, ok := err.(*os.PathError); !ok {
+			// 真的 不知道是森什么错了
+			// 那就挂掉程序吧
+			panic(err)
+		} else {
+			fmt.Printf("%s, %s, %s\n",
+				pathError.Op,
+				pathError.Path,
+				pathError.Err,
+			)
+		}
+		return
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	defer writer.Flush()
+
+	for i := 0; i < 20; i++ {
+		fmt.Fprintln(writer, i)
+	}
+}
+```
 
 
 
