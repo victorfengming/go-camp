@@ -203,3 +203,8 @@ func writeFile2(filename string) {
 
 # 3-4 服务器统一出错处理.mp4
 
+error vs panic
+
+- 意料之中: 使用error . 如文件打不开
+- 意料之外: 使用panic . 如数组越界
+
