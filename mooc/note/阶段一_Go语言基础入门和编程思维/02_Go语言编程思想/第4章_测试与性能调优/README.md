@@ -256,5 +256,12 @@ Process finished with the exit code 0
 
 
 
+- 通过testing库里面的 http假的request
+  - 这种更像单元测试
+- 通过启动http服务来进行测试
+  - 这种更加的全面
+
+
+
 
 # 4-6生成文档和示例代码.mp4

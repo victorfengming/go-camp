@@ -49,6 +49,7 @@ var tests = []struct {
 	code    int
 	message string
 }{
+	// 表格驱动
 	{errPanic, 500, "Internal Server Error"},
 	{errUserError, 400, "user error"},
 	{errNotFound, 404, "Not Found"},
