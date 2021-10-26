@@ -26,6 +26,27 @@ func main() {
 // 远程调用的本质
 //
 
+var inn = func(addr string) {
+	// 匿名函数
+	fmt.Printf("change method begin")
+	client := http.Client{}
+	//resp, err := client.Get("http://localhost:8080/golang")
+	resp, err := client.Get(addr)
+	if err != nil {
+		log.Fatalf("%s", err)
+		//return "", err
+	}
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("%s", err)
+		//return "", err
+	}
+	print(data)
+	//return string(data), nil
+	fmt.Printf("change method end")
+
+}
+
 // val interface{} >>> java 的 Object对象
 // 跟对象
 func SetFuncField(val interface{}) {
@@ -38,11 +59,9 @@ func SetFuncField(val interface{}) {
 		f := ele.Field(i)
 		if f.CanSet() {
 			f.Set(
-				reflect.ValueOf(
-					func() {
-						// 匿名函数
-						fmt.Printf("这是篡改的方法")
-					}))
+				reflect.ValueOf(inn))
+			// todo 匿名函数如何传递参数
+			//"http://localhost:8080/golang"
 		}
 		//m := t.Method(i)
 		//fmt.Println(m.Name)
@@ -61,22 +80,6 @@ type hello struct {
 }
 
 func (h hello) SayHello(name string) (string, error) {
-	client := http.Client{}
-	resp, err := client.Get(h.endpoint + name)
-	if err != nil {
-		log.Fatalf("%s", err)
-		return "", err
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalf("%s", err)
-		return "", err
-	}
-	return string(data), nil
-
-}
-
-func (h hello) GetOrder(name string) (string, error) {
 	client := http.Client{}
 	resp, err := client.Get(h.endpoint + name)
 	if err != nil {
