@@ -8,7 +8,7 @@ import (
 
 func index(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println(HelloWorld(request.Method))
-	fmt.Println("req>Path>", request.URL.Path)
+	fmt.Println("req> Path>", request.URL.Path)
 	fmt.Fprintf(writer, "IT Works")
 }
 
