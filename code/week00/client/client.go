@@ -81,17 +81,3 @@ func PrintFuncName(val interface{}) {
 	}
 	//t.MethodByName()
 }
-
-type User struct {
-	Name string
-	Age  int
-}
-
-func (u User) ChangeName(newName string) {
-	u.Name = newName
-}
-
-func (u User) ChangeAge(newAge int) {
-	u.Age = newAge
-
-}

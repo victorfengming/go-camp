@@ -64,3 +64,98 @@ func (h hello) GetOrder(name string) (string, error) {
 
 ![1635216385897](README/1635216385897.png)
 
+![1635216543771](README/1635216543771.png)
+
+
+
+## 不加指针的
+
+```go
+package main
+
+import "fmt"
+
+type User struct {
+	Name string
+	Age  int
+}
+
+func (u User) ChangeName(newName string) {
+	u.Name = newName
+}
+
+func (u User) ChangeAge(newAge int) {
+	u.Age = newAge
+
+}
+
+func main() {
+	u:=User{
+		Name: "TOm",
+		Age:  18,
+	}
+
+	u.ChangeName("Jerry")
+	u.ChangeAge(17)
+
+	fmt.Println(u.Name)
+	fmt.Println(u.Age)
+
+
+}
+```
+
+```cmd
+TOm
+18
+
+Process finished with the exit code 0
+```
+
+
+
+## 带上指针的
+
+```go
+package main
+
+import "fmt"
+
+type User struct {
+	Name string
+	Age  int
+}
+
+func (u *User) ChangeName(newName string) {
+	u.Name = newName
+}
+
+func (u *User) ChangeAge(newAge int) {
+	u.Age = newAge
+
+}
+
+func main() {
+	u:=User{
+		Name: "TOm",
+		Age:  18,
+	}
+
+	u.ChangeName("Jerry")
+	u.ChangeAge(17)
+
+	fmt.Println(u.Name)
+	fmt.Println(u.Age)
+
+
+}
+```
+
+```cmd
+Jerry
+17
+
+Process finished with the exit code 0
+```
+
+![1635217142338](README/1635217142338.png)
