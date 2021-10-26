@@ -21,6 +21,7 @@ type appHandler func(writer http.ResponseWriter, request *http.Request) error
 
 func errWrapper(handler appHandler) func(writer http.ResponseWriter, request *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
+		// panic
 		defer func() {
 			if r := recover(); r != nil {
 				log.Printf("Painic: %v", r)
@@ -29,14 +30,16 @@ func errWrapper(handler appHandler) func(writer http.ResponseWriter, request *ht
 		}()
 		err := handler(writer, request)
 		if err != nil {
+			// panic
 			log.Warn("Error handling request:%s"+
 				"", err.Error())
-
+			// user error
 			if userErr, ok := err.(userError); ok {
 				http.Error(writer, userErr.Message(), http.StatusBadRequest)
 				return
 			}
 
+			// system error
 			code := http.StatusOK
 			// 错误处理
 			switch {
