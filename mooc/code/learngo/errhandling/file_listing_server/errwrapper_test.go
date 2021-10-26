@@ -44,19 +44,20 @@ func noError(writer http.ResponseWriter, request *http.Request) error {
 	return nil
 }
 
+var tests = []struct {
+	h       appHandler
+	code    int
+	message string
+}{
+	{errPanic, 500, "Internal Server Error"},
+	{errUserError, 400, "user error"},
+	{errNotFound, 404, "Not Found"},
+	{errNoPermission, 403, "Forbidden"},
+	{errUnknown, 500, "Internal Server Error"},
+	{noError, 200, "no error"},
+}
+
 func TestErrWrapper(t *testing.T) {
-	tests := []struct {
-		h       appHandler
-		code    int
-		message string
-	}{
-		{errPanic, 500, "Internal Server Error"},
-		{errUserError, 400, "user error"},
-		{errNotFound, 404, "Not Found"},
-		{errNoPermission, 403, "Forbidden"},
-		{errUnknown, 500, "Internal Server Error"},
-		{noError, 200, "no error"},
-	}
 
 	for _, tt := range tests {
 		f := errWrapper(tt.h)
@@ -67,41 +68,31 @@ func TestErrWrapper(t *testing.T) {
 			nil,
 		)
 		f(response, request)
-		b, _ := ioutil.ReadAll(response.Body)
-		body := strings.Trim(string(b), "\n")
-		if response.Code != tt.code ||
-			body != tt.message {
-			t.Errorf("expect (%d, %s)"+
-				"expect (%d, %s);\"",
-				tt.code,
-				tt.message,
-				response.Code,
-				body,
-			)
-		}
+		verifyResponse(response.Result(), tt.code, tt.message, t)
 	}
 }
 
-/**
-=== RUN   TestErrWrapper
-time="2021-10-26T20:55:25+08:00" level=info msg="Painic: 123"
---- PASS: TestErrWrapper (0.02s)
-PASS
+func TestErrWrapperInServer(t *testing.T) {
+	for _, tt := range tests {
+		f := errWrapper(tt.h)
+		server := httptest.NewServer(
+			http.HandlerFunc(f))
+		resp, _ := http.Get(server.URL)
+		verifyResponse(resp, tt.code, tt.message, t)
+	}
+}
 
-Process finished with the exit code 0
-
-API server listening at: 127.0.0.1:50219
-=== RUN   TestErrWrapper
---- PASS: TestErrWrapper (0.00s)
-PASS
-
-Debugger finished with the exit code 0
-
-API server listening at: 127.0.0.1:50243
-=== RUN   TestErrWrapper
---- PASS: TestErrWrapper (0.00s)
-PASS
-
-Debugger finished with the exit code 0
-
-*/
+func verifyResponse(resp *http.Response, expectedCode int, expectedMsg string, t *testing.T) {
+	b, _ := ioutil.ReadAll(resp.Body)
+	body := strings.Trim(string(b), "\n")
+	if resp.StatusCode != expectedCode ||
+		body != expectedMsg {
+		t.Errorf("expect (%d, %s)"+
+			"expect (%d, %s);\"",
+			expectedCode,
+			expectedMsg,
+			resp.StatusCode,
+			body,
+		)
+	}
+}

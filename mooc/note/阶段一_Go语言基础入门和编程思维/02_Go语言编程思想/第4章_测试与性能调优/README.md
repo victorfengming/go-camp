@@ -220,4 +220,41 @@ Debugger finished with the exit code 0
 
 
 
+
+```go
+
+func TestErrWrapperInServer(t *testing.T) {
+	for _, tt := range tests {
+		f := errWrapper(tt.h)
+		server := httptest.NewServer(
+			http.HandlerFunc(f))
+		resp, _ := http.Get(server.URL)
+		b, _ := ioutil.ReadAll(resp.Body)
+		body := strings.Trim(string(b), "\n")
+		if resp.StatusCode != tt.code ||
+			body != tt.message {
+			t.Errorf("expect (%d, %s)"+
+				"expect (%d, %s);\"",
+				tt.code,
+				tt.message,
+				resp.StatusCode,
+				body,
+			)
+		}
+	}
+}
+
+
+/**
+=== RUN   TestErrWrapperInServer
+--- PASS: TestErrWrapperInServer (0.00s)
+PASS
+
+Process finished with the exit code 0
+ */
+```
+
+
+
+
 # 4-6生成文档和示例代码.mp4
