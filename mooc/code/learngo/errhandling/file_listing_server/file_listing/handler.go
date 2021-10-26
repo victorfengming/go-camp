@@ -9,13 +9,13 @@ import (
 
 const prefix = "/list/"
 
-type userError string
+type userError2 string
 
-func (e userError) Error() string {
+func (e userError2) Error() string {
 	return e.Message()
 }
 
-func (e userError) Message() string {
+func (e userError2) Message() string {
 	return string(e)
 }
 
@@ -23,7 +23,7 @@ func HandleFileList(writer http.ResponseWriter, request *http.Request) error {
 	//Path截取 切片 [ i:]
 	if strings.Index(request.URL.Path, prefix) != 0 {
 		// 说明没有以list开头
-		return userError("Path must start with " + prefix)
+		return userError2("Path must start with " + prefix)
 	}
 
 	path := request.URL.Path[len("/list/"):]
