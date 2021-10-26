@@ -25,7 +25,6 @@ func writeFile(filename string) {
 
 	for i := 0; i < 20; i++ {
 		fmt.Fprintln(writer, i)
-
 	}
 }
 
