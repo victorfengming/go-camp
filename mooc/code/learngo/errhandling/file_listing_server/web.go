@@ -22,14 +22,21 @@ type appHandler func(writer http.ResponseWriter, request *http.Request) error
 func errWrapper(handler appHandler) func(writer http.ResponseWriter, request *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		defer func() {
-			r := recover()
-			log.Printf("Painic: %v", r)
-			http.Error(writer, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			if r := recover(); r != nil {
+				log.Printf("Painic: %v", r)
+				http.Error(writer, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			}
 		}()
 		err := handler(writer, request)
 		if err != nil {
 			log.Warn("Error handling request:%s"+
 				"", err.Error())
+
+			if userErr, ok := err.(userError); ok {
+				http.Error(writer, userErr.Message(), http.StatusBadRequest)
+				return
+			}
+
 			code := http.StatusOK
 			// 错误处理
 			switch {
@@ -44,4 +51,10 @@ func errWrapper(handler appHandler) func(writer http.ResponseWriter, request *ht
 		}
 
 	}
+}
+
+// 自d定义错误
+type userError interface {
+	error
+	Message() string
 }
