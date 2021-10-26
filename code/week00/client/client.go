@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	h := hello{
+	var h HelloService = hello{
 		endpoint: "http://localhost:8080/",
 	}
 	msg, err := h.SayHello("够浪")
@@ -43,3 +43,22 @@ func (h hello) SayHello(name string) (string, error) {
 	return string(data), nil
 
 }
+
+func (h hello) GetOrder(name string) (string, error) {
+	client := http.Client{}
+	resp, err := client.Get(h.endpoint + name)
+	if err != nil {
+		log.Fatalf("%s", err)
+		return "", err
+	}
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("%s", err)
+		return "", err
+	}
+	return string(data), nil
+
+}
+
+// 远程调用的本质
+//
