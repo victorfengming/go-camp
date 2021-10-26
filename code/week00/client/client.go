@@ -26,25 +26,26 @@ func main() {
 // 远程调用的本质
 //
 
-var inn = func(addr string) {
-	// 匿名函数
-	fmt.Printf("change method begin")
-	client := http.Client{}
-	//resp, err := client.Get("http://localhost:8080/golang")
-	resp, err := client.Get(addr)
-	if err != nil {
-		log.Fatalf("%s", err)
-		//return "", err
+func inn(addr string) func() {
+	return func() {
+		// 匿名函数
+		fmt.Printf("change method begin\n")
+		client := http.Client{}
+		//resp, err := client.Get("http://localhost:8080/golang")
+		resp, err := client.Get(addr)
+		if err != nil {
+			log.Fatalf("%s", err)
+			//return "", err
+		}
+		data, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalf("%s", err)
+			//return "", err
+		}
+		print(data)
+		//return string(data), nil
+		fmt.Printf("change method end\n")
 	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalf("%s", err)
-		//return "", err
-	}
-	print(data)
-	//return string(data), nil
-	fmt.Printf("change method end")
-
 }
 
 // val interface{} >>> java 的 Object对象
@@ -59,7 +60,7 @@ func SetFuncField(val interface{}) {
 		f := ele.Field(i)
 		if f.CanSet() {
 			f.Set(
-				reflect.ValueOf(inn))
+				reflect.ValueOf(inn("http://localhost:8080/golang2")))
 			// todo 匿名函数如何传递参数
 			//"http://localhost:8080/golang"
 		}
