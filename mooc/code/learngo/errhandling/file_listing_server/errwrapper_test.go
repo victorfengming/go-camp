@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -38,6 +39,11 @@ func errUnknown(writer http.ResponseWriter, request *http.Request) error {
 	return errors.New("unknown error")
 }
 
+func noError(writer http.ResponseWriter, request *http.Request) error {
+	fmt.Fprintln(writer, "no error")
+	return nil
+}
+
 func TestErrWrapper(t *testing.T) {
 	tests := []struct {
 		h       appHandler
@@ -49,6 +55,7 @@ func TestErrWrapper(t *testing.T) {
 		{errNotFound, 404, "Not Found"},
 		{errNoPermission, 403, "Forbidden"},
 		{errUnknown, 500, "Internal Server Error"},
+		{noError, 200, "no error"},
 	}
 
 	for _, tt := range tests {
@@ -83,9 +90,14 @@ PASS
 
 Process finished with the exit code 0
 
-
-
 API server listening at: 127.0.0.1:50219
+=== RUN   TestErrWrapper
+--- PASS: TestErrWrapper (0.00s)
+PASS
+
+Debugger finished with the exit code 0
+
+API server listening at: 127.0.0.1:50243
 === RUN   TestErrWrapper
 --- PASS: TestErrWrapper (0.00s)
 PASS
