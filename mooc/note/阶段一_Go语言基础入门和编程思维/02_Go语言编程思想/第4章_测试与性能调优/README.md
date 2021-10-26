@@ -72,8 +72,25 @@ Process finished with the exit code 1
 
 
 
+```cmd
+go test -coverprofile=c.out
+go test -coverprofile=c.out .
+
+
+go tool pprof cpu.out
+go tool pprof -cpuprofile cpu.out
+
+```
+
+
+
+
 
 # 4-3使用pprof进行性能调优.mp4
+
+![1635249436838](README/1635249436838.png)
+
+
 
 
 # 4-4测试http服务器（上）.mp4
