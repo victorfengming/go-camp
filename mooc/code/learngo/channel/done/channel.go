@@ -6,19 +6,17 @@ import (
 	//"time"
 )
 
-func doWork(
-	id int, c chan int, wg *sync.WaitGroup,
-) {
-	for n := range c {
+func doWork(id int, w worker) {
+	for n := range w.in {
 		fmt.Printf("@%d---%d\n", id, n)
 		// 通知外面 做完了( channel 是一等公民)
-		wg.Done()
+		w.done()
 	}
 }
 
 type worker struct {
-	in chan int
-	wg *sync.WaitGroup
+	in   chan int
+	done func()
 }
 
 // 告诉外面用的人 , 我这个channel怎么用
@@ -26,9 +24,13 @@ func createWorker(id int, wg *sync.WaitGroup) worker { // 告诉外面用的人 
 	//
 	w := worker{
 		in: make(chan int),
-		wg: wg,
+		// 函数式编程
+		// 匿名函数来赋值
+		done: func() {
+			wg.Done()
+		},
 	}
-	go doWork(id, w.in, wg)
+	go doWork(id, w)
 	return w
 }
 
@@ -64,24 +66,27 @@ func main() {
 /**
 Channel as first-class citizen
 @0---97
-@4---101
-@2---99
-@3---100
-@9---106
-@5---102
-@6---103
-@8---105
-@7---104
 @1---98
-fatal error: all goroutines are asleep - deadlock!
+@2---99
+@2---67
+@3---100
+@3---68
+@4---101
+@4---69
+@5---102
+@5---70
+@6---103
+@6---71
+@7---104
+@7---72
+@8---105
+@8---73
+@9---106
+@9---74
+@0---65
+@1---66
 
-goroutine 1 [chan send]:
-main.chanDemo()
-	E:/Projects/GolandProjects/go-camp/mooc/code/learngo/channel/done/channel.go:45 +0x15d
-main.main()
-	E:/Projects/GolandProjects/go-camp/mooc/code/learngo/channel/done/channel.go:63 +0x57
-
-goroutine 6 [chan send]:
+Process finished with the exit code 0
 
 
 */
