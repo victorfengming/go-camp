@@ -1022,6 +1022,16 @@ Process finished with the exit code 0
 
 
 
+## code01
+
+```go
+
+```
+
+
+
+
+
 # 6-4 Select
 
 
