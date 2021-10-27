@@ -64,11 +64,5 @@ func main() {
 }
 
 /**
-@0---49
-@0---50
-@0---51
-@0---100
 
-Process finished with the exit code 0
-
-*/
+ */

@@ -2,9 +2,9 @@
 
 # 6-1 channel
 
+## 代码案例
 
-
-## code1
+### code1
 
 ```go
 package main
@@ -44,7 +44,7 @@ main.main()
 
 ![1635301183810](README/1635301183810.png)
 
-## code2
+### code2
 
 ```go
 package main
@@ -95,7 +95,7 @@ Process finished with the exit code 0
 
 > go语言中的channel 也是一等公民
 
-## code3
+### code3
 
 ```go
 package main
@@ -148,7 +148,7 @@ Process finished with the exit code 0
 
 
 
-## code4
+### code4
 
 ```go
 package main
@@ -209,7 +209,7 @@ Process finished with the exit code 0
 
 在打印
 
-## code5
+### code5
 
 ```go
 package main
@@ -279,7 +279,7 @@ Process finished with the exit code 0
 
 > goroutine 调度之后,先发的不一定会先收到
 
-## code6
+### code6
 
 ```go
 package main
@@ -369,7 +369,7 @@ Process finished with the exit code 0
 
 
 
-## code7
+### code7
 
 ```go
 package main
@@ -440,7 +440,7 @@ Process finished with the exit code 2
 
 
 
-## code8
+### code8
 
 ```go
 func bufferedChannel() {
@@ -458,7 +458,7 @@ func bufferedChannel() {
 
 
 
-## code9
+### code9
 
 ```go
 package main
@@ -509,7 +509,7 @@ Process finished with the exit code 0
 
 
 
-## code10
+### code10
 
 ```go
 package main
@@ -581,7 +581,28 @@ func worker(id int, c chan int) {
 
 
 
+
+
+## 理论channel
+
+- channel
+- buffered channel
+- range
+- 理论基础:Communication Sequential Process (CSP)
+
+> go语言的创作者说:
+
+Don't communicate by sharing memory; sharememory by communicating.
+
+不要通过共享内存来通讯;通过通信来共享内存
+
+
+
 # 6-2 使用Channel等待任务结束
+
+**通过通信来共享内存**
+
+
 
 
 
