@@ -1,4 +1,4 @@
-
+[这可能是最容易理解的 Go Mutex 源码剖析](https://mp.weixin.qq.com/s/evT_S7tmot-URxVFdVktAQ)
 
 # 6-1 channel
 
@@ -1931,6 +1931,12 @@ Process finished with the exit code 0
 - 编译器/解释器/虚拟机层面的多任务
 - 多个协程可能在一个或多个线程上运行
 
+
+
+
+
+# [这可能是最容易理解的 Go Mutex 源码剖析](https://mp.weixin.qq.com/s/evT_S7tmot-URxVFdVktAQ)
+
 # 6-6 并发模式（上）
 
 ## code00 init 
@@ -2094,6 +2100,166 @@ message 4
 ```
 
 
+
+
+
+## code03 加上参数
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+// chan 是一等公民
+func msgGen(name string) <-chan string {
+	c := make(chan string)
+	go func() {
+		i := 0
+		for {
+			time.Sleep(time.Millisecond * time.Duration(rand.Intn(2000)))
+			// sprintf 作为字符串打印
+			c <- fmt.Sprintf("service %s: message %d", name, i)
+			i++
+		}
+	}()
+	return c
+}
+func main() {
+	// 生成消息
+	m1 := msgGen("服务A")
+	m2 := msgGen("服务B")
+	for {
+		fmt.Println(<-m1)
+		fmt.Println(<-m2)
+		//m<- "abc"
+		// 没有办法发数据
+	}
+
+}
+
+/**
+service 服务A: message 0
+service 服务B: message 0
+service 服务A: message 1
+service 服务B: message 1
+service 服务A: message 2
+service 服务B: message 2
+service 服务A: message 3
+service 服务B: message 3
+service 服务A: message 4
+*/
+
+```
+
+> 上面是交替的等待,显然是不对的
+
+
+
+
+
+## code 04 让他们交替
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+// chan 是一等公民
+func msgGen(name string) <-chan string {
+	c := make(chan string)
+	go func() {
+		i := 0
+		for {
+			time.Sleep(time.Millisecond * time.Duration(rand.Intn(2000)))
+			// sprintf 作为字符串打印
+			c <- fmt.Sprintf("service %s: message %d", name, i)
+			i++
+		}
+	}()
+	return c
+}
+
+func fanIn(c1, c2 <-chan string) chan string {
+	c := make(chan string)
+	go func() {
+		// todo c1,c2 如何调度
+		for {
+			c <- <-c1
+		}
+	}()
+	go func() {
+		for {
+			c <- <-c2
+		}
+	}()
+	return c
+}
+func main() {
+	// 生成消息
+	m1 := msgGen("服务A")
+	m2 := msgGen("服务B")
+	m := fanIn(m1, m2)
+
+	for {
+		fmt.Println(<-m)
+		//m<- "abc"
+		// 没有办法发数据
+	}
+
+}
+
+/**
+service 服务A: message 0
+service 服务B: message 0
+service 服务B: message 1
+service 服务A: message 1
+service 服务B: message 2
+service 服务B: message 3
+service 服务B: message 4
+service 服务A: message 2
+service 服务B: message 5
+service 服务B: message 6
+service 服务A: message 3
+service 服务B: message 7
+service 服务A: message 4
+service 服务A: message 5
+service 服务B: message 8
+
+Process finished with the exit code -1073741510 (0xC000013A: interrupted by Ctrl+C)
+
+*/
+
+```
+
+
+
+## code 05 select 方式
+
+```go
+func fanInBySelect(c1, c2 <-chan string) chan string {
+	c := make(chan string)
+	go func() {
+		for {
+			select {
+			case m := <-c1:
+				c <- m
+			case m := <-c2:
+				c <- m
+			}
+		}
+	}()
+	return c
+}
+
+```
 
 
 
