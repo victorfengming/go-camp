@@ -45,7 +45,64 @@ func unmarshal() {
 	fmt.Printf("%+v", o)
 }
 
+func parseNLP() {
+	res := `{
+"data": [
+    {
+        "synonym":"",
+        "weight":"0.6",
+        "word": "真丝",
+        "tag":"材质"
+    },
+    {
+        "synonym":"",
+        "weight":"0.8",
+        "word": "韩都衣舍",
+        "tag":"品牌"
+    },
+    {
+        "synonym":"连身裙;联衣裙",
+        "weight":"1.0",
+        "word": "连衣裙",
+        "tag":"品类"
+    }
+]
+}`
+	//m := struct {
+	//	Data []struct {
+	//		Synonym string `json:"synonym"`
+	//		Tag     string `json:"tag"`
+	//	} `json:"data"`
+	//}{}
+
+	m := make(map[string]interface{})
+	err := json.Unmarshal([]byte(res), &m)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("-----------------------------------------------------------\n")
+	fmt.Printf("%+v\n",
+		m["data"].([]interface{})[2].(map[string]interface{})["synonym"],
+	)
+	fmt.Printf("-----------------------------------------------------------\n")
+
+	for k, v := range m {
+		fmt.Println(k, v)
+		for _, v2 := range v.([]interface{}) {
+			for v3, v4 := range v2.(map[string]interface{}) {
+				fmt.Printf("v3:%v---v4:%v\n", v3, v4)
+			}
+			//fmt.Printf("v1:%v---v2%v\n",v1,v2)
+
+		}
+	}
+
+	fmt.Printf("%+v\n", m)
+	//fmt.Printf("%+v, %+v\n", m.Data[2].Synonym, m.Data[2].Tag)
+}
+
 func main() {
 
-	unmarshal()
+	parseNLP()
 }
