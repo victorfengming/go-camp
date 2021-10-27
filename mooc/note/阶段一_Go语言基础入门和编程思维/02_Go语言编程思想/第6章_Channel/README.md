@@ -1817,6 +1817,87 @@ Process finished with the exit code 0
 
 
 
+```cmd
+PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\basic\atomic> go run -race .\atomic.go
+==================
+WARNING: DATA RACE
+Read at 0x00c00000e0d8 by main goroutine:
+  main.main()
+      E:/Projects/GolandProjects/go-camp/mooc/code/learngo/basic/atomic/atomic.go:24 +0xee
+
+Previous write at 0x00c00000e0d8 by goroutine 7:
+  main.(*atomicInt).increment()
+      E:/Projects/GolandProjects/go-camp/mooc/code/learngo/basic/atomic/atomic.go:11 +0x45
+  main.main.func1()
+      E:/Projects/GolandProjects/go-camp/mooc/code/learngo/basic/atomic/atomic.go:21 +0x2e
+
+Goroutine 7 (finished) created at:
+  main.main()
+
+```
+
+data race 存在
+
+## code01 加上锁的
+
+
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+type atomicInt struct {
+	value int
+	lock  sync.Mutex
+}
+
+func (a *atomicInt) increment() {
+	a.lock.Lock()
+
+	defer a.lock.Unlock()
+	a.value++
+}
+func (a *atomicInt) get() int {
+	a.lock.Lock()
+
+	defer a.lock.Unlock()
+	return a.value
+}
+
+func main() {
+	var a atomicInt
+	a.increment()
+	go func() {
+		a.increment()
+	}()
+	time.Sleep(time.Millisecond)
+	fmt.Println(a.get())
+}
+
+/**
+2
+
+Process finished with the exit code 0
+*/
+
+```
+
+```cmd
+PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\basic\atomic> go run -race .\atomic.go
+2
+PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\basic\atomic>
+
+```
+
+> 这回没有data race了
+
+
+
 # 6-6 并发模式（上）
 
 
