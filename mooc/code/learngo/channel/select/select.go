@@ -21,39 +21,56 @@ func generator() chan int {
 	return out
 }
 
+func worker(id int, c chan int) {
+	for {
+		n, ok := <-c
+		if ok {
+			fmt.Printf("@%d---%d\n", id, n)
+		} else {
+			break
+		}
+	}
+}
+
+// 告诉外面用的人 , 我这个channel怎么用
+func createWorker(id int) chan int { // 告诉外面用的人 , 我这个channel怎么用
+	c := make(chan int)
+	go worker(id, c)
+	return c
+}
+
 func main() {
 	var c1, c2 = generator(), generator()
+	var work = createWorker(0)
+
+	n := 0
+	hasValue := false
 	for {
+
+		var activeWorker chan<- int
+		if hasValue {
+			activeWorker = work
+		}
 		select {
-		case n := <-c1:
-			fmt.Println("received from c1:", n)
-		case n := <-c2:
-			fmt.Println("received from c2:", n)
-			//default:
-			//	fmt.Println("no val received")
+		case n = <-c1:
+			hasValue = true
+		case n = <-c2:
+			hasValue = true
+		case activeWorker <- n:
+			hasValue = false
 		}
 	}
 
 }
 
 /**
-received from c1: 0
-received from c2: 0
-received from c2: 1
-received from c1: 1
-received from c1: 2
-received from c2: 2
-received from c1: 3
-received from c2: 3
-received from c2: 4
-received from c2: 5
-received from c1: 4
-received from c1: 5
-received from c1: 6
-received from c2: 6
-received from c1: 7
-received from c2: 7
-received from c1: 8
+@0---0
+@0---0
+@0---1
+@0---1
+@0---2
+@0---2
+@0---3
 
 Process finished with the exit code -1073741510 (0xC000013A: interrupted by Ctrl+C)
 
