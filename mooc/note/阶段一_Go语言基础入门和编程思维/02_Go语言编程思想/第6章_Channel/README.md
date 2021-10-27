@@ -564,7 +564,7 @@ Process finished with the exit code 0
 
 
 
-
+### code11
 
 ```go
 func worker(id int, c chan int) {
@@ -579,10 +579,6 @@ func worker(id int, c chan int) {
 
 
 
-
-
-
-
 ## 理论channel
 
 - channel
@@ -590,11 +586,13 @@ func worker(id int, c chan int) {
 - range
 - 理论基础:Communication Sequential Process (CSP)
 
+### go语言的创作者说
+
 > go语言的创作者说:
 
 Don't communicate by sharing memory; sharememory by communicating.
 
-不要通过共享内存来通讯;通过通信来共享内存
+**不要通过共享内存来通讯;通过通信来共享内存**
 
 
 
@@ -604,7 +602,7 @@ Don't communicate by sharing memory; sharememory by communicating.
 
 
 
-
+## code01
 
 ```
 目前是按照顺序打印的
@@ -700,7 +698,7 @@ Process finished with the exit code 0
 
 
 
-
+## code02
 
 ```go
 package main
@@ -801,6 +799,23 @@ goroutine 6 [chan send]:
 > 因为 channel 没有长度
 
 
+
+## code03
+
+```go
+func doWork(id int, c chan int, done chan bool) {
+	for n := range c {
+		fmt.Printf("@%d---%d\n", id, n)
+		// 通知外面 做完了( channel 是一等公民)
+		go func() {
+			done <- true
+		}()
+	}
+}
+//这样就可以了
+```
+
+> 这是因为我们需要等2次,如果我们只是等一次就不用的
 
 
 

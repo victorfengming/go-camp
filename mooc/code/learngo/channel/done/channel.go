@@ -40,22 +40,16 @@ func chanDemo() {
 
 	for i, w := range workers {
 		w.in <- 'a' + i
-		//res := <-workers[i].done
-		//print(res)
+		_ = <-w.done
+
 	}
 	for i, w := range workers {
 		w.in <- 'A' + i
-		//res := <-workers[i].done
-		//print(res)
+		_ = <-w.done
+
 	}
 
 	// wait for all of them
-	for _, w := range workers {
-		res := <-w.done
-		res2 := <-w.done
-		print(res)
-		print(res2)
-	}
 	time.Sleep(time.Second)
 
 }
