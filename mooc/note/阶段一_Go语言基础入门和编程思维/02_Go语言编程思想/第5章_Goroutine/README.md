@@ -211,6 +211,8 @@ PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\goroutine>
 
 
 
+![1635300094530](README/1635300094530.png)
+
 
 
 
