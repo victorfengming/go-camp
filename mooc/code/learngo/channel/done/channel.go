@@ -18,7 +18,7 @@ type worker struct {
 	done chan bool
 }
 
-// // 告诉外面用的人 , 我这个channel怎么用
+// 告诉外面用的人 , 我这个channel怎么用
 func createWorker(id int) worker { // 告诉外面用的人 , 我这个channel怎么用
 	//
 	w := worker{
@@ -36,15 +36,23 @@ func chanDemo() {
 		workers[i] = createWorker(i)
 	}
 
-	for i := 0; i < 10; i++ {
-		workers[i].in <- 'a' + i
-		res := <-workers[i].done
-		print(res)
+	for i, w := range workers {
+		w.in <- 'a' + i
+		//res := <-workers[i].done
+		//print(res)
 	}
-	for i := 0; i < 10; i++ {
-		workers[i].in <- 'A' + i
-		res := <-workers[i].done
+	for i, w := range workers {
+		w.in <- 'A' + i
+		//res := <-workers[i].done
+		//print(res)
+	}
+
+	// wait for all of them
+	for _, w := range workers {
+		res := <-w.done
+		res2 := <-w.done
 		print(res)
+		print(res2)
 	}
 	time.Sleep(time.Second)
 
@@ -53,7 +61,6 @@ func chanDemo() {
 func main() {
 	fmt.Println("Channel as first-class citizen")
 	chanDemo()
-	//bufferedChannel()
 }
 
 /**
