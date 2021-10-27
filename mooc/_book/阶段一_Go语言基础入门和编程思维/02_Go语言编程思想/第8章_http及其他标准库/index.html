@@ -312,13 +312,521 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#8-1-http&#x6807;&#x51C6;&#x5E93;"><b></b>8-1 http&#x6807;&#x51C6;&#x5E93;</a></li><li><span class="title-icon "></span><a href="#8-2-json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;"><b></b>8-2 json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;</a></li><li><span class="title-icon "></span><a href="#8-3-&#x7B2C;&#x4E09;&#x65B9;api&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;"><b></b>8-3 &#x7B2C;&#x4E09;&#x65B9;API&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;</a></li><li><span class="title-icon "></span><a href="#8-4-gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;"><b></b>8-4 gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;</a></li><li><span class="title-icon "></span><a href="#8-5-&#x4E3A;gin&#x589E;&#x52A0;middleware"><b></b>8-5 &#x4E3A;gin&#x589E;&#x52A0;middleware</a></li></ul></div><a href="#8-1-http&#x6807;&#x51C6;&#x5E93;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="8-1-http&#x6807;&#x51C6;&#x5E93;"><a name="8-1-http&#x6807;&#x51C6;&#x5E93;" class="anchor-navigation-ex-anchor" href="#8-1-http&#x6807;&#x51C6;&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>8-1 http&#x6807;&#x51C6;&#x5E93;</h1>
+                                <html><head></head><body><div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#8-1-http&#x6807;&#x51C6;&#x5E93;"><b></b>8-1 http&#x6807;&#x51C6;&#x5E93;</a></li><li><span class="title-icon "></span><a href="#8-2-json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;"><b></b>8-2 json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;</a></li><ul><li><span class="title-icon "></span><a href="#v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;"><b></b>+v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;</a></li><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;-json&#x5E93;-&#x683C;&#x5F0F;&#x5316;&#x5E93;"><b></b>&#x4F7F;&#x7528; json&#x5E93; &#x683C;&#x5F0F;&#x5316;&#x5E93;</a></li><li><span class="title-icon "></span><a href="#json&#x5B57;&#x6BB5;"><b></b>json&#x5B57;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;"><b></b>&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#json-&#x5D4C;&#x5957;"><b></b>json &#x5D4C;&#x5957;</a></li><li><span class="title-icon "></span><a href="#&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;"><b></b>&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;</a></li><li><span class="title-icon "></span><a href="#&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;"><b></b>&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;</a></li></ul><li><span class="title-icon "></span><a href="#8-3-&#x7B2C;&#x4E09;&#x65B9;api&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;"><b></b>8-3 &#x7B2C;&#x4E09;&#x65B9;API&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;</a></li><ul><li><span class="title-icon "></span><a href="#map&#x7C7B;&#x578B;&#x6536;-json"><b></b>map&#x7C7B;&#x578B;&#x6536; json</a></li><li><span class="title-icon "></span><a href="#&#x7ED3;&#x6784;&#x4F53;&#x6536;json"><b></b>&#x7ED3;&#x6784;&#x4F53;&#x6536;json</a></li></ul><li><span class="title-icon "></span><a href="#8-4-gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;"><b></b>8-4 gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;</a></li><li><span class="title-icon "></span><a href="#8-5-&#x4E3A;gin&#x589E;&#x52A0;middleware"><b></b>8-5 &#x4E3A;gin&#x589E;&#x52A0;middleware</a></li></ul></div><a href="#8-1-http&#x6807;&#x51C6;&#x5E93;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><p>[[[]</p>
+<h1 id="8-1-http&#x6807;&#x51C6;&#x5E93;"><a name="8-1-http&#x6807;&#x51C6;&#x5E93;" class="anchor-navigation-ex-anchor" href="#8-1-http&#x6807;&#x51C6;&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>8-1 http&#x6807;&#x51C6;&#x5E93;</h1>
+<p><a href="README/1635335363928.png" data-lightbox="3dacd9e3-01c5-4b1c-b642-940ff8070446" data-title="1635335363928"><img src="README/1635335363928.png" alt="1635335363928"></a></p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;net/http&quot;</span>
+    <span class="token string">&quot;net/http/httputil&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.imooc.com&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    response<span class="token punctuation">,</span> err <span class="token operator">:=</span> httputil<span class="token punctuation">.</span><span class="token function">DumpResponse</span><span class="token punctuation">(</span>resp<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> response<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>&#x6211;&#x73B0;&#x5728;&#x60F3;&#x5BF9; httpclinet&#x8FDB;&#x884C;&#x63A7;&#x5236;</p>
+<p>&#x6BD4;&#x5982;&#x6211;&#x60F3;&#x8981;&#x8BBF;&#x95EE;&#x624B;&#x673A;&#x7248;&#x7684;imooc</p>
+</blockquote>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;net/http&quot;</span>
+    <span class="token string">&quot;net/http/httputil&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    request<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span>
+        http<span class="token punctuation">.</span>MethodGet<span class="token punctuation">,</span>
+        <span class="token string">&quot;http://www.imooc.com&quot;</span><span class="token punctuation">,</span>
+        <span class="token boolean">nil</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    request<span class="token punctuation">.</span>Header<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;User-Agent&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1&quot;</span><span class="token punctuation">)</span>
+    resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span>DefaultClient<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    response<span class="token punctuation">,</span> err <span class="token operator">:=</span> httputil<span class="token punctuation">.</span><span class="token function">DumpResponse</span><span class="token punctuation">(</span>resp<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> response<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p><a href="README/1635336316220.png" data-lightbox="7f6ee19d-6d3b-45c7-b66c-e12c1cb7d5da" data-title="1635336316220"><img src="README/1635336316220.png" alt="1635336316220"></a></p>
+<p><a href="README/1635336328401.png" data-lightbox="c1180450-605e-4bb6-b955-3a59cd90c109" data-title="1635336328401"><img src="README/1635336328401.png" alt="1635336328401"></a></p>
 <h1 id="8-2-json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;"><a name="8-2-json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;" class="anchor-navigation-ex-anchor" href="#8-2-json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>8-2 json&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x5904;&#x7406;</h1>
+<h2 id="v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;"><a name="v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;" class="anchor-navigation-ex-anchor" href="#v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;"><i class="fa fa-link" aria-hidden="true"></i></a>+v&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id <span class="token builtin">string</span>
+    Name <span class="token builtin">string</span>
+    Quantity <span class="token builtin">int</span>
+    TotalPrice <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o<span class="token operator">:=</span>Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span>         <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Name<span class="token punctuation">:</span>       <span class="token string">&quot;lreag go&quot;</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v&quot;</span><span class="token punctuation">,</span>o<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;-json&#x5E93;-&#x683C;&#x5F0F;&#x5316;&#x5E93;"><a name="&#x4F7F;&#x7528;-json&#x5E93;-&#x683C;&#x5F0F;&#x5316;&#x5E93;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;-json&#x5E93;-&#x683C;&#x5F0F;&#x5316;&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528; json&#x5E93; &#x683C;&#x5F0F;&#x5316;&#x5E93;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id <span class="token builtin">string</span>
+    Name <span class="token builtin">string</span>
+    Quantity <span class="token builtin">int</span>
+    TotalPrice <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o<span class="token operator">:=</span>Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span>         <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Name<span class="token punctuation">:</span>       <span class="token string">&quot;lreag go&quot;</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span>err<span class="token operator">:=</span>json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="json&#x5B57;&#x6BB5;"><a name="json&#x5B57;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#json&#x5B57;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>json&#x5B57;&#x6BB5;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id <span class="token builtin">string</span> <span class="token string">`json:&quot;id&quot;`</span>
+    Name <span class="token builtin">string</span> <span class="token string">`json:&quot;name&quot;`</span>
+    Quantity <span class="token builtin">int</span> <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span><span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o<span class="token operator">:=</span>Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span>         <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Name<span class="token punctuation">:</span>       <span class="token string">&quot;lreag go&quot;</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span>err<span class="token operator">:=</span>json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>&#x5728;&#x7ED3;&#x6784;&#x4F53;&#x91CC;&#x9762;,&#x9996;&#x5B57;&#x6BCD;&#x5C0F;&#x5199;&#x7684;&#x5B57;&#x6BB5;&#x662F;&#x4E0D;&#x80FD;&#x88AB;&#x770B;&#x5230;&#x7684;</p>
+</blockquote>
+<h2 id="&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;"><a name="&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7701;&#x7565;&#x7A7A;&#x5B57;&#x6BB5;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id         <span class="token builtin">string</span> <span class="token string">`json:&quot;id&quot;`</span>
+    Name       <span class="token builtin">string</span> <span class="token string">`json:&quot;name,omitempty&quot;`</span>
+    Quantity   <span class="token builtin">int</span>    <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span>    <span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">:=</span> Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span>         <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        <span class="token comment">//Name:       &quot;lreag go&quot;,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/**
+{&quot;id&quot;:&quot;124&quot;,&quot;quantity&quot;:3,&quot;total_price&quot;:30}
+
+Process finished with the exit code 0
+ */</span>
+</code></pre>
+<h2 id="json-&#x5D4C;&#x5957;"><a name="json-&#x5D4C;&#x5957;" class="anchor-navigation-ex-anchor" href="#json-&#x5D4C;&#x5957;"><i class="fa fa-link" aria-hidden="true"></i></a>json &#x5D4C;&#x5957;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> OrderItem <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    ID    <span class="token builtin">string</span>  <span class="token string">`json:&quot;id&quot;`</span>
+    Name  <span class="token builtin">string</span>  <span class="token string">`json:&quot;name&quot;`</span>
+    Price <span class="token builtin">float64</span> <span class="token string">`json:&quot;price&quot;`</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id         <span class="token builtin">string</span> <span class="token string">`json:&quot;id&quot;`</span>
+    Item       OrderItem <span class="token string">`json:&quot;item&quot;`</span>
+    Quantity   <span class="token builtin">int</span> <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span> <span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">:=</span> Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Item<span class="token punctuation">:</span> OrderItem<span class="token punctuation">{</span>
+            ID<span class="token punctuation">:</span>    <span class="token string">&quot;8675645&quot;</span><span class="token punctuation">,</span>
+            Name<span class="token punctuation">:</span>  <span class="token string">&quot;nancy&quot;</span><span class="token punctuation">,</span>
+            Price<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+{
+  &quot;id&quot;: &quot;124&quot;,
+  &quot;item&quot;: {
+    &quot;id&quot;: &quot;8675645&quot;,
+    &quot;name&quot;: &quot;nancy&quot;,
+    &quot;price&quot;: 0
+  },
+  &quot;quantity&quot;: 3,
+  &quot;total_price&quot;: 30
+}
+
+*/</span>
+</code></pre>
+<h2 id="&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;"><a name="&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;" class="anchor-navigation-ex-anchor" href="#&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6307;&#x9488;&#x4E5F;&#x53EF;&#x4EE5;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> OrderItem <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    ID    <span class="token builtin">string</span>  <span class="token string">`json:&quot;id&quot;`</span>
+    Name  <span class="token builtin">string</span>  <span class="token string">`json:&quot;name&quot;`</span>
+    Price <span class="token builtin">float64</span> <span class="token string">`json:&quot;price&quot;`</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id         <span class="token builtin">string</span> <span class="token string">`json:&quot;id&quot;`</span>
+    Item       <span class="token operator">*</span>OrderItem <span class="token string">`json:&quot;item&quot;`</span>
+    Quantity   <span class="token builtin">int</span> <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span> <span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">:=</span> Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Item<span class="token punctuation">:</span> <span class="token operator">&amp;</span>OrderItem<span class="token punctuation">{</span>
+            ID<span class="token punctuation">:</span>    <span class="token string">&quot;8675645&quot;</span><span class="token punctuation">,</span>
+            Name<span class="token punctuation">:</span>  <span class="token string">&quot;nancy&quot;</span><span class="token punctuation">,</span>
+            Price<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+{
+  &quot;id&quot;: &quot;124&quot;,
+  &quot;item&quot;: {
+    &quot;id&quot;: &quot;8675645&quot;,
+    &quot;name&quot;: &quot;nancy&quot;,
+    &quot;price&quot;: 0
+  },
+  &quot;quantity&quot;: 3,
+  &quot;total_price&quot;: 30
+}
+
+*/</span>
+</code></pre>
+<h2 id="&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;"><a name="&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;" class="anchor-navigation-ex-anchor" href="#&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5207;&#x7247;&#x4E5F;&#x652F;&#x6301;</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> OrderItem <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    ID    <span class="token builtin">string</span>  <span class="token string">`json:&quot;id&quot;`</span>
+    Name  <span class="token builtin">string</span>  <span class="token string">`json:&quot;name&quot;`</span>
+    Price <span class="token builtin">float64</span> <span class="token string">`json:&quot;price&quot;`</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id         <span class="token builtin">string</span> <span class="token string">`json:&quot;id&quot;`</span>
+    Item       <span class="token operator">*</span><span class="token punctuation">[</span><span class="token punctuation">]</span>OrderItem <span class="token string">`json:&quot;item&quot;`</span>
+    Quantity   <span class="token builtin">int</span> <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span> <span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">:=</span> Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Item<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token punctuation">[</span><span class="token punctuation">]</span>OrderItem<span class="token punctuation">{</span>
+            <span class="token punctuation">{</span>
+                ID<span class="token punctuation">:</span>    <span class="token string">&quot;8675645&quot;</span><span class="token punctuation">,</span>
+                Name<span class="token punctuation">:</span>  <span class="token string">&quot;nancy&quot;</span><span class="token punctuation">,</span>
+                Price<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                ID<span class="token punctuation">:</span>    <span class="token string">&quot;2456733&quot;</span><span class="token punctuation">,</span>
+                Name<span class="token punctuation">:</span>  <span class="token string">&quot;yael&quot;</span><span class="token punctuation">,</span>
+                Price<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//fmt.Printf(&quot;%+v&quot;,o)</span>
+
+    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+{
+  &quot;id&quot;: &quot;124&quot;,
+  &quot;item&quot;: [
+    {
+      &quot;id&quot;: &quot;8675645&quot;,
+      &quot;name&quot;: &quot;nancy&quot;,
+      &quot;price&quot;: 50
+    },
+    {
+      &quot;id&quot;: &quot;2456733&quot;,
+      &quot;name&quot;: &quot;yael&quot;,
+      &quot;price&quot;: 20
+    }
+  ],
+  &quot;quantity&quot;: 3,
+  &quot;total_price&quot;: 30
+}
+
+*/</span>
+</code></pre>
+<p><a href="README/1635345615051.png" data-lightbox="620aa28b-408f-4035-a926-95b02b85d34b" data-title="1635345615051"><img src="README/1635345615051.png" alt="1635345615051"></a></p>
 <h1 id="8-3-&#x7B2C;&#x4E09;&#x65B9;api&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;"><a name="8-3-&#x7B2C;&#x4E09;&#x65B9;api&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;" class="anchor-navigation-ex-anchor" href="#8-3-&#x7B2C;&#x4E09;&#x65B9;api&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;"><i class="fa fa-link" aria-hidden="true"></i></a>8-3 &#x7B2C;&#x4E09;&#x65B9;API&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x6280;&#x5DE7;</h1>
+<h2 id="map&#x7C7B;&#x578B;&#x6536;-json"><a name="map&#x7C7B;&#x578B;&#x6536;-json" class="anchor-navigation-ex-anchor" href="#map&#x7C7B;&#x578B;&#x6536;-json"><i class="fa fa-link" aria-hidden="true"></i></a>map&#x7C7B;&#x578B;&#x6536; json</h2>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> OrderItem <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    ID    <span class="token builtin">string</span>  <span class="token string">`json:&quot;id&quot;`</span>
+    Name  <span class="token builtin">string</span>  <span class="token string">`json:&quot;name&quot;`</span>
+    Price <span class="token builtin">float64</span> <span class="token string">`json:&quot;price&quot;`</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> Order <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Id         <span class="token builtin">string</span>       <span class="token string">`json:&quot;id&quot;`</span>
+    Item       <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>OrderItem <span class="token string">`json:&quot;item&quot;`</span>
+    Quantity   <span class="token builtin">int</span>          <span class="token string">`json:&quot;quantity&quot;`</span>
+    TotalPrice <span class="token builtin">int</span>          <span class="token string">`json:&quot;total_price&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">marshal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    o <span class="token operator">:=</span> Order<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+        Item<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>OrderItem<span class="token punctuation">{</span>
+            <span class="token punctuation">{</span>
+                ID<span class="token punctuation">:</span>    <span class="token string">&quot;8675645&quot;</span><span class="token punctuation">,</span>
+                Name<span class="token punctuation">:</span>  <span class="token string">&quot;nancy&quot;</span><span class="token punctuation">,</span>
+                Price<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                ID<span class="token punctuation">:</span>    <span class="token string">&quot;2456733&quot;</span><span class="token punctuation">,</span>
+                Name<span class="token punctuation">:</span>  <span class="token string">&quot;yael&quot;</span><span class="token punctuation">,</span>
+                Price<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        Quantity<span class="token punctuation">:</span>   <span class="token number">3</span><span class="token punctuation">,</span>
+        TotalPrice<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">unmarshal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s <span class="token operator">:=</span> <span class="token string">`{&quot;id&quot;:&quot;124&quot;,&quot;item&quot;:[{&quot;id&quot;:&quot;8675645&quot;,&quot;name&quot;:&quot;nancy&quot;,&quot;price&quot;:50},{&quot;id&quot;:&quot;2456733&quot;,&quot;name&quot;:&quot;yael&quot;,&quot;price&quot;:20}],&quot;quantity&quot;:3,&quot;total_price&quot;:30}
+`</span>
+    <span class="token keyword">var</span> o Order
+    json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>o<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v&quot;</span><span class="token punctuation">,</span> o<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">func</span> <span class="token function">parseNLP</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res <span class="token operator">:=</span> <span class="token string">`{
+&quot;data&quot;: [
+    {
+        &quot;synonym&quot;:&quot;&quot;,
+        &quot;weight&quot;:&quot;0.6&quot;,
+        &quot;word&quot;: &quot;&#x771F;&#x4E1D;&quot;,
+        &quot;tag&quot;:&quot;&#x6750;&#x8D28;&quot;
+    },
+    {
+        &quot;synonym&quot;:&quot;&quot;,
+        &quot;weight&quot;:&quot;0.8&quot;,
+        &quot;word&quot;: &quot;&#x97E9;&#x90FD;&#x8863;&#x820D;&quot;,
+        &quot;tag&quot;:&quot;&#x54C1;&#x724C;&quot;
+    },
+    {
+        &quot;synonym&quot;:&quot;&#x8FDE;&#x8EAB;&#x88D9;;&#x8054;&#x8863;&#x88D9;&quot;,
+        &quot;weight&quot;:&quot;1.0&quot;,
+        &quot;word&quot;: &quot;&#x8FDE;&#x8863;&#x88D9;&quot;,
+        &quot;tag&quot;:&quot;&#x54C1;&#x7C7B;&quot;
+    }
+]
+}`</span>
+    <span class="token comment">//m := struct {</span>
+    <span class="token comment">//    Data []struct {</span>
+    <span class="token comment">//        Synonym string `json:&quot;synonym&quot;`</span>
+    <span class="token comment">//        Tag     string `json:&quot;tag&quot;`</span>
+    <span class="token comment">//    } `json:&quot;data&quot;`</span>
+    <span class="token comment">//}{}</span>
+
+    m <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;-----------------------------------------------------------\n&quot;</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v\n&quot;</span><span class="token punctuation">,</span>m<span class="token punctuation">[</span><span class="token string">&quot;data&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">&quot;synonym&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;-----------------------------------------------------------\n&quot;</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">for</span> k<span class="token punctuation">,</span>v <span class="token operator">:=</span> <span class="token keyword">range</span> m<span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span>v2 <span class="token operator">:=</span> <span class="token keyword">range</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">for</span> v3<span class="token punctuation">,</span>v4<span class="token operator">:=</span><span class="token keyword">range</span> v2<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;v3:%v---v4:%v\n&quot;</span><span class="token punctuation">,</span>v3<span class="token punctuation">,</span>v4<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//fmt.Printf(&quot;v1:%v---v2%v\n&quot;,v1,v2)</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v\n&quot;</span><span class="token punctuation">,</span> m<span class="token punctuation">)</span>
+    <span class="token comment">//fmt.Printf(&quot;%+v, %+v\n&quot;, m.Data[2].Synonym, m.Data[2].Tag)</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token function">parseNLP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x7684;map[string]interface &#x5C5E;&#x5B9E;&#x590D;&#x6742;</p>
+<pre class="language-"><code class="lang-go">fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v\n&quot;</span><span class="token punctuation">,</span>
+        m<span class="token punctuation">[</span><span class="token string">&quot;data&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">&quot;synonym&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x7ED3;&#x6784;&#x4F53;&#x6536;json"><a name="&#x7ED3;&#x6784;&#x4F53;&#x6536;json" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x6784;&#x4F53;&#x6536;json"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x6784;&#x4F53;&#x6536;json</h2>
+<blockquote>
+<p>&#x6362;&#x6210;&#x7ED3;&#x6784;&#x4F53;&#x7684;</p>
+</blockquote>
+<pre class="language-"><code class="lang-go">m <span class="token operator">:=</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+        Data <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">struct</span> <span class="token punctuation">{</span>
+            Synonym <span class="token builtin">string</span> <span class="token string">`json:&quot;synonym&quot;`</span>
+            Tag     <span class="token builtin">string</span> <span class="token string">`json:&quot;tag&quot;`</span>
+        <span class="token punctuation">}</span> <span class="token string">`json:&quot;data&quot;`</span>
+    <span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-go">err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%+v, %+v\n&quot;</span><span class="token punctuation">,</span> m<span class="token punctuation">.</span>Data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Synonym<span class="token punctuation">,</span> m<span class="token punctuation">.</span>Data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Tag<span class="token punctuation">)</span>
+</code></pre>
 <h1 id="8-4-gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;"><a name="8-4-gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#8-4-gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>8-4 gin&#x6846;&#x67B6;&#x4ECB;&#x7ECD;</h1>
 <h1 id="8-5-&#x4E3A;gin&#x589E;&#x52A0;middleware"><a name="8-5-&#x4E3A;gin&#x589E;&#x52A0;middleware" class="anchor-navigation-ex-anchor" href="#8-5-&#x4E3A;gin&#x589E;&#x52A0;middleware"><i class="fa fa-link" aria-hidden="true"></i></a>8-5 &#x4E3A;gin&#x589E;&#x52A0;middleware<hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz',appKey: 'nWerbwV2WMAxOEmAMkJKvXzs',placeholder: 'Just go go',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: false})</script></h1>
 <footer class="page-footer"><span class="copyright">victorfengming.gitee.io&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
-2021-10-27 17:06:31
+2021-10-27 23:12:22
 </span></footer></body></html>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -359,7 +867,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第8章_http及其他标准库","level":"1.2.1.6","depth":3,"previous":{"title":"第7章_迷宫的广度优先搜索","level":"1.2.1.5","depth":3,"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/README.md","ref":"./阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","valine","hide-element","chapter-fold","expandable-chapters","favicon","lightbox","splitter","-lunr","pageview-count","ancre-navigation","-search","search-plus","-highlight","popup","prism","prism-themes","-sharing","sharing-plus","tbfed-pagefooter","toolbar-button"],"root":"./note","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"victorfengming.gitee.io，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"toolbar-button":{"label":"下载PDF","url":"https://victorfengming.gitee.io/go-camp/","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"./img/avator.png.icon.ico","bookmark":"./img/avator.png.icon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"pageview-count":{},"prism-themes":{},"ancre-navigation":{"showLevel":true,"associatedWithSummary":true,"mode":"float","printLog":false,"multipleH1":true,"float":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""},"pageTop":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""}},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{},"valine":{"placeholder":"Just go go","avatar":"","pageSize":10,"lang":"zh-CN","recordIP":false,"appId":"CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz","appKey":"nWerbwV2WMAxOEmAMkJKvXzs"},"search-plus":{}},"theme":"default","author":"Victor <victorfengming@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"go-camp","language":"zh-hans","links":{"sidebar":{"文档索引页":"https://victorfengming.gitee.io/index/gitbook/"}},"gitbook":"3.2.3","description":"go-camp,golang训练营"},"file":{"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第8章_http及其他标准库/README.md","mtime":"2021-10-27T09:06:31.364Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-27T09:21:18.124Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第8章_http及其他标准库","level":"1.2.1.6","depth":3,"previous":{"title":"第7章_迷宫的广度优先搜索","level":"1.2.1.5","depth":3,"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/README.md","ref":"./阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","valine","hide-element","chapter-fold","expandable-chapters","favicon","lightbox","splitter","-lunr","pageview-count","ancre-navigation","-search","search-plus","-highlight","popup","prism","prism-themes","-sharing","sharing-plus","tbfed-pagefooter","toolbar-button"],"root":"./note","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"victorfengming.gitee.io，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"toolbar-button":{"label":"下载PDF","url":"https://victorfengming.gitee.io/go-camp/","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"./img/avator.png.icon.ico","bookmark":"./img/avator.png.icon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"pageview-count":{},"prism-themes":{},"ancre-navigation":{"showLevel":true,"associatedWithSummary":true,"mode":"float","printLog":false,"multipleH1":true,"float":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""},"pageTop":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""}},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{},"valine":{"placeholder":"Just go go","avatar":"","pageSize":10,"lang":"zh-CN","recordIP":false,"appId":"CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz","appKey":"nWerbwV2WMAxOEmAMkJKvXzs"},"search-plus":{}},"theme":"default","author":"Victor <victorfengming@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"go-camp","language":"zh-hans","links":{"sidebar":{"文档索引页":"https://victorfengming.gitee.io/index/gitbook/"}},"gitbook":"3.2.3","description":"go-camp,golang训练营"},"file":{"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第8章_http及其他标准库/README.md","mtime":"2021-10-27T15:12:22.301Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-27T15:50:45.756Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
