@@ -14,7 +14,7 @@ go 训练营
 
 #### 使用说明
 
-1.  xxxx
+1.  https://bitbucket.org/victorfengming/go-camp/src/master/mooc/note/阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第6章_Channel
 2.  xxxx
 3.  xxxx
 
