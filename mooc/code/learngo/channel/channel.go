@@ -5,16 +5,18 @@ import (
 	"time"
 )
 
+func worker(c chan int) {
+	for {
+		n := <-c
+		fmt.Println(n)
+	}
+}
+
 func chanDemo() {
 	//var c chan int // c == nil
 	c := make(chan int)
 
-	go func() {
-		for {
-			n := <-c
-			fmt.Println(n)
-		}
-	}()
+	go worker(c)
 
 	c <- 1
 	c <- 2
