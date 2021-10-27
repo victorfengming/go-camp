@@ -1,0 +1,658 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第4章_测试与性能调优 · go-camp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Victor <victorfengming@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-ancre-navigation/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../第5章_Goroutine/" />
+    
+    
+    <link rel="prev" href="../第3章_错误处理和资源管理/" />
+    
+
+    
+        <link rel="shortcut icon" href='../../../img/avator.png.icon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../../../img/avator.png.icon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://victorfengming.gitee.io/index/gitbook/" target="_blank" class="custom-link">文档索引页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    README
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    [阶段一_Go语言基础入门和编程思维]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    [02_Go语言编程思想]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../第3章_错误处理和资源管理/">
+            
+                <a href="../第3章_错误处理和资源管理/">
+            
+                    
+                    第3章_错误处理和资源管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第4章_测试与性能调优
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../第5章_Goroutine/">
+            
+                <a href="../第5章_Goroutine/">
+            
+                    
+                    第5章_Goroutine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../第6章_Channel/">
+            
+                <a href="../第6章_Channel/">
+            
+                    
+                    第6章_Channel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="../第7章_迷宫的广度优先搜索/">
+            
+                <a href="../第7章_迷宫的广度优先搜索/">
+            
+                    
+                    第7章_迷宫的广度优先搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="../第8章_http及其他标准库/">
+            
+                <a href="../第8章_http及其他标准库/">
+            
+                    
+                    第8章_http及其他标准库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >第4章_测试与性能调优</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#4-1&#x6D4B;&#x8BD5;mp4"><b></b>4-1&#x6D4B;&#x8BD5;.mp4</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;"><b></b>&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;</a></li><li><span class="title-icon "></span><a href="#&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;"><b></b>&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;</a></li></ul><li><span class="title-icon "></span><a href="#4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;mp4"><b></b>4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;.mp4</a></li><li><span class="title-icon "></span><a href="#4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;mp4"><b></b>4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;.mp4</a></li><li><span class="title-icon "></span><a href="#4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;mp4"><b></b>4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;.mp4</a></li><li><span class="title-icon "></span><a href="#4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;mp4"><b></b>4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;.mp4</a></li><li><span class="title-icon "></span><a href="#4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;mp4"><b></b>4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;.mp4</a></li></ul></div><a href="#4-1&#x6D4B;&#x8BD5;mp4" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="4-1&#x6D4B;&#x8BD5;mp4"><a name="4-1&#x6D4B;&#x8BD5;mp4" class="anchor-navigation-ex-anchor" href="#4-1&#x6D4B;&#x8BD5;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-1&#x6D4B;&#x8BD5;.mp4</h1>
+<p>&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;vs&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;</p>
+<h2 id="&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;"><a name="&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;" class="anchor-navigation-ex-anchor" href="#&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F20;&#x7EDF;&#x6D4B;&#x8BD5;</h2>
+<ul>
+<li>&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x548C;&#x6D4B;&#x8BD5;&#x903B;&#x8F91;&#x6DF7;&#x5728;&#x4E00;&#x8D77;</li>
+<li>&#x51FA;&#x9519;&#x4FE1;&#x606F;&#x4E0D;&#x660E;&#x786E;</li>
+<li>&#x2014;&#x65E6;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x51FA;&#x9519;&#x6D4B;&#x8BD5;&#x5168;&#x90E8;&#x7ED3;&#x675F;</li>
+</ul>
+<h2 id="&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;"><a name="&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;" class="anchor-navigation-ex-anchor" href="#&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;</h2>
+<p><a href="README/1635243684088.png" data-lightbox="bec412d3-5cb1-4596-9a32-79980c4526d6" data-title="1635243684088"><img src="README/1635243684088.png" alt="1635243684088"></a></p>
+<ul>
+<li>&#x5206;&#x79BB;&#x7684;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x548C;&#x6D4B;&#x8BD5;&#x903B;&#x8F91;</li>
+<li>&#x660E;&#x786E;&#x7684;&#x51FA;&#x9519;&#x4FE1;&#x606F;</li>
+<li>&#x53EF;&#x4EE5;&#x90E8;&#x5206;&#x5931;&#x8D25;</li>
+<li>go&#x8BED;&#x8A00;&#x7684;&#x8BED;&#x6CD5;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x66F4;&#x6613;&#x5B9E;&#x8DF5;&#x8868;&#x683C;&#x9A71;&#x52A8;&#x6D4B;&#x8BD5;</li>
+</ul>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;testing&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestTriangle</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    tests <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c <span class="token builtin">int</span>    <span class="token punctuation">}</span><span class="token punctuation">{</span>
+        <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">17</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">37</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span><span class="token number">30000</span><span class="token punctuation">,</span><span class="token number">40000</span><span class="token punctuation">,</span><span class="token number">52000</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span>tt<span class="token operator">:=</span><span class="token keyword">range</span> tests<span class="token punctuation">{</span>
+        <span class="token keyword">if</span> actual<span class="token operator">:=</span> <span class="token function">calcTriangle</span><span class="token punctuation">(</span>tt<span class="token punctuation">.</span>a<span class="token punctuation">,</span>tt<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> actual <span class="token operator">!=</span>tt<span class="token punctuation">.</span>c<span class="token punctuation">{</span>
+            t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">&quot;calcTriang %d %d got %d ; exceped&quot;</span><span class="token punctuation">,</span>tt<span class="token punctuation">.</span>a<span class="token punctuation">,</span>tt<span class="token punctuation">.</span>b<span class="token punctuation">,</span>tt<span class="token punctuation">.</span>c<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-cmd">=== RUN   TestTriangle
+    add_test.go:16: calcTriang 30000 40000 got 52000 ; exceped
+--- FAIL: TestTriangle (0.00s)
+
+FAIL
+
+Process finished with the exit code 1
+</code></pre>
+<h1 id="4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;mp4"><a name="4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;mp4" class="anchor-navigation-ex-anchor" href="#4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-2&#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&#x548C;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;.mp4</h1>
+<pre class="language-"><code class="lang-cmd">go test -coverprofile=c.out
+go test -coverprofile=c.out .
+
+
+go tool pprof cpu.out
+go tool pprof -cpuprofile cpu.out
+</code></pre>
+<h1 id="4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;mp4"><a name="4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;mp4" class="anchor-navigation-ex-anchor" href="#4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-3&#x4F7F;&#x7528;pprof&#x8FDB;&#x884C;&#x6027;&#x80FD;&#x8C03;&#x4F18;.mp4</h1>
+<p><a href="README/1635249436838.png" data-lightbox="da6c2741-f86a-49f6-8cca-e00bd884a198" data-title="1635249436838"><img src="README/1635249436838.png" alt="1635249436838"></a></p>
+<h1 id="4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;mp4"><a name="4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;mp4" class="anchor-navigation-ex-anchor" href="#4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-4&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0A;&#xFF09;.mp4</h1>
+<p><a href="README/1635253212575.png" data-lightbox="8f82e1af-afc9-4358-be5d-d7c737bad386" data-title="1635253212575"><img src="README/1635253212575.png" alt="1635253212575"></a></p>
+<h1 id="4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;mp4"><a name="4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;mp4" class="anchor-navigation-ex-anchor" href="#4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-5&#x6D4B;&#x8BD5;http&#x670D;&#x52A1;&#x5668;&#xFF08;&#x4E0B;&#xFF09;.mp4</h1>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;errors&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;io/ioutil&quot;</span>
+    <span class="token string">&quot;net/http&quot;</span>
+    <span class="token string">&quot;net/http/httptest&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+    <span class="token string">&quot;strings&quot;</span>
+    <span class="token string">&quot;testing&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">errPanic</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> testingUserError <span class="token builtin">string</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e testingUserError<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> e<span class="token punctuation">.</span><span class="token function">Message</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e testingUserError<span class="token punctuation">)</span> <span class="token function">Message</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">string</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">errUserError</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">testingUserError</span><span class="token punctuation">(</span><span class="token string">&quot;user error&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">errNotFound</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> os<span class="token punctuation">.</span>ErrNotExist
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">errNoPermission</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> os<span class="token punctuation">.</span>ErrPermission
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">errUnknown</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;unknown error&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">noError</span><span class="token punctuation">(</span>writer http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> request <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Fprintln</span><span class="token punctuation">(</span>writer<span class="token punctuation">,</span> <span class="token string">&quot;no error&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">TestErrWrapper</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    tests <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">struct</span> <span class="token punctuation">{</span>
+        h       appHandler
+        code    <span class="token builtin">int</span>
+        message <span class="token builtin">string</span>
+    <span class="token punctuation">}</span><span class="token punctuation">{</span>
+        <span class="token punctuation">{</span>errPanic<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token string">&quot;Internal Server Error&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>errUserError<span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token string">&quot;user error&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>errNotFound<span class="token punctuation">,</span> <span class="token number">404</span><span class="token punctuation">,</span> <span class="token string">&quot;Not Found&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>errNoPermission<span class="token punctuation">,</span> <span class="token number">403</span><span class="token punctuation">,</span> <span class="token string">&quot;Forbidden&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>errUnknown<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token string">&quot;Internal Server Error&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>noError<span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">&quot;no error&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> tt <span class="token operator">:=</span> <span class="token keyword">range</span> tests <span class="token punctuation">{</span>
+        f <span class="token operator">:=</span> <span class="token function">errWrapper</span><span class="token punctuation">(</span>tt<span class="token punctuation">.</span>h<span class="token punctuation">)</span>
+        response <span class="token operator">:=</span> httptest<span class="token punctuation">.</span><span class="token function">NewRecorder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        request <span class="token operator">:=</span> httptest<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span>
+            http<span class="token punctuation">.</span>MethodGet<span class="token punctuation">,</span>
+            <span class="token string">&quot;http://localhost:8888/list/fib2.txt&quot;</span><span class="token punctuation">,</span>
+            <span class="token boolean">nil</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">f</span><span class="token punctuation">(</span>response<span class="token punctuation">,</span> request<span class="token punctuation">)</span>
+        b<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
+        body <span class="token operator">:=</span> strings<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> response<span class="token punctuation">.</span>Code <span class="token operator">!=</span> tt<span class="token punctuation">.</span>code <span class="token operator">||</span>
+            body <span class="token operator">!=</span> tt<span class="token punctuation">.</span>message <span class="token punctuation">{</span>
+            t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">&quot;expect (%d, %s)&quot;</span><span class="token operator">+</span>
+                <span class="token string">&quot;expect (%d, %s);\&quot;&quot;</span><span class="token punctuation">,</span>
+                tt<span class="token punctuation">.</span>code<span class="token punctuation">,</span>
+                tt<span class="token punctuation">.</span>message<span class="token punctuation">,</span>
+                response<span class="token punctuation">.</span>Code<span class="token punctuation">,</span>
+                body<span class="token punctuation">,</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+=== RUN   TestErrWrapper
+time=&quot;2021-10-26T20:55:25+08:00&quot; level=info msg=&quot;Painic: 123&quot;
+--- PASS: TestErrWrapper (0.02s)
+PASS
+
+Process finished with the exit code 0
+
+API server listening at: 127.0.0.1:50219
+=== RUN   TestErrWrapper
+--- PASS: TestErrWrapper (0.00s)
+PASS
+
+Debugger finished with the exit code 0
+
+API server listening at: 127.0.0.1:50243
+=== RUN   TestErrWrapper
+--- PASS: TestErrWrapper (0.00s)
+PASS
+
+Debugger finished with the exit code 0
+
+*/</span>
+</code></pre>
+<blockquote>
+<p>&#x51FD;&#x6570;&#x662F;&#x4E00;&#x7B49;&#x516C;&#x6C11;</p>
+</blockquote>
+<pre class="language-"><code class="lang-go">
+<span class="token keyword">func</span> <span class="token function">TestErrWrapperInServer</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> tt <span class="token operator">:=</span> <span class="token keyword">range</span> tests <span class="token punctuation">{</span>
+        f <span class="token operator">:=</span> <span class="token function">errWrapper</span><span class="token punctuation">(</span>tt<span class="token punctuation">.</span>h<span class="token punctuation">)</span>
+        server <span class="token operator">:=</span> httptest<span class="token punctuation">.</span><span class="token function">NewServer</span><span class="token punctuation">(</span>
+            http<span class="token punctuation">.</span><span class="token function">HandlerFunc</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        resp<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>server<span class="token punctuation">.</span>URL<span class="token punctuation">)</span>
+        b<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
+        body <span class="token operator">:=</span> strings<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> resp<span class="token punctuation">.</span>StatusCode <span class="token operator">!=</span> tt<span class="token punctuation">.</span>code <span class="token operator">||</span>
+            body <span class="token operator">!=</span> tt<span class="token punctuation">.</span>message <span class="token punctuation">{</span>
+            t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">&quot;expect (%d, %s)&quot;</span><span class="token operator">+</span>
+                <span class="token string">&quot;expect (%d, %s);\&quot;&quot;</span><span class="token punctuation">,</span>
+                tt<span class="token punctuation">.</span>code<span class="token punctuation">,</span>
+                tt<span class="token punctuation">.</span>message<span class="token punctuation">,</span>
+                resp<span class="token punctuation">.</span>StatusCode<span class="token punctuation">,</span>
+                body<span class="token punctuation">,</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment">/**
+=== RUN   TestErrWrapperInServer
+--- PASS: TestErrWrapperInServer (0.00s)
+PASS
+
+Process finished with the exit code 0
+ */</span>
+</code></pre>
+<ul>
+<li>&#x901A;&#x8FC7;testing&#x5E93;&#x91CC;&#x9762;&#x7684; http&#x5047;&#x7684;request<ul>
+<li>&#x8FD9;&#x79CD;&#x66F4;&#x50CF;&#x5355;&#x5143;&#x6D4B;&#x8BD5;</li>
+</ul>
+</li>
+<li>&#x901A;&#x8FC7;&#x542F;&#x52A8;http&#x670D;&#x52A1;&#x6765;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;<ul>
+<li>&#x8FD9;&#x79CD;&#x66F4;&#x52A0;&#x7684;&#x5168;&#x9762;</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;mp4"><a name="4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;mp4" class="anchor-navigation-ex-anchor" href="#4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;mp4"><i class="fa fa-link" aria-hidden="true"></i></a>4-6&#x751F;&#x6210;&#x6587;&#x6863;&#x548C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;.mp4</h1>
+<pre class="language-"><code class="lang-go">godoc <span class="token operator">-</span>http <span class="token punctuation">:</span><span class="token number">6060</span>
+</code></pre>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> queue
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">ExampleQueue_Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    q <span class="token operator">:=</span> Queue<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span>
+    q<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    q<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>q<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>q<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>q<span class="token punctuation">.</span><span class="token function">IsEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>q<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>q<span class="token punctuation">.</span><span class="token function">IsEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Output:</span>
+    <span class="token comment">// 1</span>
+    <span class="token comment">// 2</span>
+    <span class="token comment">// false</span>
+    <span class="token comment">// 3</span>
+    <span class="token comment">// true</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p></p><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz',appKey: 'nWerbwV2WMAxOEmAMkJKvXzs',placeholder: 'Just go go',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: false})</script> <p></p>
+<footer class="page-footer"><span class="copyright">victorfengming.gitee.io&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-10-26 22:09:12
+</span></footer></body></html>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../第3章_错误处理和资源管理/" class="navigation navigation-prev " aria-label="Previous page: 第3章_错误处理和资源管理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../第5章_Goroutine/" class="navigation navigation-next " aria-label="Next page: 第5章_Goroutine">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第4章_测试与性能调优","level":"1.2.1.2","depth":3,"next":{"title":"第5章_Goroutine","level":"1.2.1.3","depth":3,"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第5章_Goroutine/README.md","ref":"./阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第5章_Goroutine/README.md","articles":[]},"previous":{"title":"第3章_错误处理和资源管理","level":"1.2.1.1","depth":3,"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第3章_错误处理和资源管理/README.md","ref":"./阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第3章_错误处理和资源管理/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","valine","hide-element","chapter-fold","expandable-chapters","favicon","lightbox","splitter","-lunr","pageview-count","ancre-navigation","-search","search-plus","-highlight","popup","prism","prism-themes","-sharing","sharing-plus","tbfed-pagefooter","toolbar-button"],"root":"./note","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"victorfengming.gitee.io，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"toolbar-button":{"label":"下载PDF","url":"https://victorfengming.gitee.io/go-camp/","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"./img/avator.png.icon.ico","bookmark":"./img/avator.png.icon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"pageview-count":{},"prism-themes":{},"ancre-navigation":{"showLevel":true,"associatedWithSummary":true,"mode":"float","printLog":false,"multipleH1":true,"float":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""},"pageTop":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""}},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{},"valine":{"placeholder":"Just go go","avatar":"","pageSize":10,"lang":"zh-CN","recordIP":false,"appId":"CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz","appKey":"nWerbwV2WMAxOEmAMkJKvXzs"},"search-plus":{}},"theme":"default","author":"Victor <victorfengming@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"go-camp","language":"zh-hans","links":{"sidebar":{"文档索引页":"https://victorfengming.gitee.io/index/gitbook/"}},"gitbook":"3.2.3","description":"go-camp,golang训练营"},"file":{"path":"阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第4章_测试与性能调优/README.md","mtime":"2021-10-26T14:09:12.532Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-27T09:21:18.124Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
