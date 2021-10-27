@@ -159,6 +159,10 @@ PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\goroutine>
 
 
 
+
+# 5-2 go语言的调度器.mp4
+
+
 ## 携程特点
 
 - 轻量级的线程
@@ -216,6 +220,3 @@ PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\goroutine>
 
 
 
-
-
-# 5-2 go语言的调度器.mp4
