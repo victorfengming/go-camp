@@ -21,19 +21,19 @@ func msgGen(name string) <-chan string {
 	return c
 }
 
-func fanIn(c1, c2 <-chan string) chan string {
+func fanIn(chs ...<-chan string) chan string {
 	c := make(chan string)
-	go func() {
-		// todo c1,c2 如何调度
-		for {
-			c <- <-c1
-		}
-	}()
-	go func() {
-		for {
-			c <- <-c2
-		}
-	}()
+	var ch_temp <-chan string
+	for _, ch := range chs {
+		ch_temp = ch
+		go func() {
+			// todo c1,c2 如何调度
+			for {
+				c <- <-ch_temp
+			}
+		}()
+	}
+
 	return c
 }
 
@@ -56,7 +56,8 @@ func main() {
 	// 生成消息
 	m1 := msgGen("服务A")
 	m2 := msgGen("服务B")
-	m := fanInBySelect(m1, m2)
+	m3 := msgGen("服务C")
+	m := fanIn(m1, m2, m3)
 
 	for {
 		fmt.Println(<-m)
@@ -67,18 +68,13 @@ func main() {
 }
 
 /**
-service 服务A: message 0
-service 服务B: message 0
-service 服务A: message 1
-service 服务B: message 1
-service 服务A: message 2
-service 服务A: message 3
-service 服务A: message 4
-service 服务B: message 2
-service 服务A: message 5
-service 服务A: message 6
-service 服务B: message 3
-
+service 服务C: message 0
+service 服务C: message 1
+service 服务C: message 2
+service 服务C: message 3
+service 服务C: message 4
+service 服务C: message 5
+service 服务C: message 6
 
 Process finished with the exit code -1073741510 (0xC000013A: interrupted by Ctrl+C)
 
