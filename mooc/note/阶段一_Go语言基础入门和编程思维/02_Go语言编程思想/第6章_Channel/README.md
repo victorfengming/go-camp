@@ -1898,6 +1898,39 @@ PS E:\Projects\GolandProjects\go-camp\mooc\code\learngo\basic\atomic>
 
 
 
+## code 02 部分加锁 (匿名函数)
+
+```go
+func (a *atomicInt) increment() {
+	fmt.Println("safe increment")
+	func() {
+		a.lock.Lock()
+
+		defer a.lock.Unlock()
+		a.value++
+	}()
+}
+```
+
+
+
+```cmd
+safe increment
+safe increment
+2
+
+Process finished with the exit code 0
+```
+
+
+
+## 协程Coroutine
+
+- 轻量级“线程”
+- **非抢占式**多任务处理，由协程主动交出控制权
+- 编译器/解释器/虚拟机层面的多任务
+- 多个协程可能在一个或多个线程上运行
+
 # 6-6 并发模式（上）
 
 
