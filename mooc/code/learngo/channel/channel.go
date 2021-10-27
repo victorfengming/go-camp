@@ -5,7 +5,9 @@ import (
 	"time"
 )
 
-func worker(id int) chan int {
+// // 告诉外面用的人 , 我这个channel怎么用
+func createWorker(id int) chan<- int { // 告诉外面用的人 , 我这个channel怎么用
+	//
 	c := make(chan int)
 	go func() {
 		for {
@@ -17,10 +19,10 @@ func worker(id int) chan int {
 
 func chanDemo() {
 
-	var cahnneles [10]chan int
+	var cahnneles [10]chan<- int
 	for i := 0; i < 10; i++ {
 		//var c chan int // c == nil
-		cahnneles[i] = worker(i)
+		cahnneles[i] = createWorker(i)
 	}
 
 	for i := 0; i < 10; i++ {
