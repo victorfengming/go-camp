@@ -2,55 +2,57 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"sync"
+	//"time"
 )
 
-func doWork(id int, c chan int, done chan bool) {
+func doWork(
+	id int, c chan int, wg *sync.WaitGroup,
+) {
 	for n := range c {
 		fmt.Printf("@%d---%d\n", id, n)
 		// 通知外面 做完了( channel 是一等公民)
-		go func() {
-			done <- true
-		}()
+		wg.Done()
 	}
 }
 
 type worker struct {
-	in   chan int
-	done chan bool
+	in chan int
+	wg *sync.WaitGroup
 }
 
 // 告诉外面用的人 , 我这个channel怎么用
-func createWorker(id int) worker { // 告诉外面用的人 , 我这个channel怎么用
+func createWorker(id int, wg *sync.WaitGroup) worker { // 告诉外面用的人 , 我这个channel怎么用
 	//
 	w := worker{
-		in:   make(chan int),
-		done: make(chan bool),
+		in: make(chan int),
+		wg: wg,
 	}
-	go doWork(id, w.in, w.done)
+	go doWork(id, w.in, wg)
 	return w
 }
 
 func chanDemo() {
 
+	var wg sync.WaitGroup
+
 	var workers [10]worker
 	for i := 0; i < 10; i++ {
-		workers[i] = createWorker(i)
+		workers[i] = createWorker(i, &wg)
 	}
+	wg.Add(20)
 
 	for i, w := range workers {
 		w.in <- 'a' + i
-		_ = <-w.done
+		//wg.Add(1)
 
 	}
 	for i, w := range workers {
 		w.in <- 'A' + i
-		_ = <-w.done
-
 	}
 
-	// wait for all of them
-	time.Sleep(time.Second)
+	// wait for all of themtime.Sleep(time.Second)
+	wg.Wait()
 
 }
 
