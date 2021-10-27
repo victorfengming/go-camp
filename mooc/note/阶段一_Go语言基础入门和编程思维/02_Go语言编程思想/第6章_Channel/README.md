@@ -1025,6 +1025,106 @@ Process finished with the exit code 0
 ## code01
 
 ```go
+package tree
+
+import "fmt"
+
+type Node struct {
+	Value       int
+	Left, Right *Node
+}
+
+func (node Node) Print() {
+	fmt.Print(node.Value, " ")
+}
+
+func (node *Node) SetValue(value int) {
+	if node == nil {
+		fmt.Println("Setting Value to nil " +
+			"node. Ignored.")
+		return
+	}
+	node.Value = value
+}
+
+func CreateNode(value int) *Node {
+	return &Node{Value: value}
+}
+
+```
+
+
+
+```go
+package tree
+
+import "fmt"
+
+func (node *Node) Traverse() {
+	node.TraverseFunc(func(n *Node) {
+		n.Print()
+	})
+	fmt.Println()
+}
+
+func (node *Node) TraverseFunc(f func(*Node)) {
+	if node == nil {
+		return
+	}
+
+	node.Left.TraverseFunc(f)
+	f(node)
+	node.Right.TraverseFunc(f)
+}
+
+func (node *Node) TraverseWithChannel() chan *Node {
+	out := make(chan *Node)
+	go func() {
+		node.TraverseFunc(func(node *Node) {
+			out <- node
+		})
+		close(out)
+	}()
+	return out
+}
+
+```
+
+
+
+# 6-4 Select
+
+使用select 进行调度
+
+
+
+
+
+## code1 非阻塞式的处理
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var c1, c2 chan int
+	select {
+	case n := <-c1:
+		fmt.Println("received from c1:", n)
+	case n := <-c2:
+		fmt.Println("received from c2:", n)
+	default:
+		fmt.Println("no val received")
+	}
+
+}
+/**
+no val received
+
+Process finished with the exit code 0
+非阻塞式的处理
+ */
 
 ```
 
@@ -1032,7 +1132,92 @@ Process finished with the exit code 0
 
 
 
-# 6-4 Select
+## code02 死循环
+
+```go
+func main() {
+	var c1, c2 chan int
+	for {
+		select {
+		case n := <-c1:
+			fmt.Println("received from c1:", n)
+		case n := <-c2:
+			fmt.Println("received from c2:", n)
+		default:
+			fmt.Println("no val received")
+		}
+	}
+
+}
+```
+
+## code03 改进
+
+
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func generator() chan int {
+	out := make(chan int)
+	go func() {
+		i := 0
+		for {
+			time.Sleep(
+				time.Duration(rand.Intn(1500)) * time.Millisecond,
+			)
+			out <- i
+			i++
+		}
+	}()
+	return out
+}
+
+func main() {
+	var c1, c2 = generator(), generator()
+	for {
+		select {
+		case n := <-c1:
+			fmt.Println("received from c1:", n)
+		case n := <-c2:
+			fmt.Println("received from c2:", n)
+		//default:
+		//	fmt.Println("no val received")
+		}
+	}
+
+}
+
+/**
+received from c1: 0
+received from c2: 0
+received from c2: 1
+received from c1: 1
+received from c1: 2
+received from c2: 2
+received from c1: 3
+received from c2: 3
+received from c2: 4
+received from c2: 5
+received from c1: 4
+received from c1: 5
+received from c1: 6
+received from c2: 6
+received from c1: 7
+received from c2: 7
+received from c1: 8
+
+Process finished with the exit code -1073741510 (0xC000013A: interrupted by Ctrl+C)
+
+*/
+
+```
 
 
 
