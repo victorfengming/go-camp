@@ -1774,6 +1774,47 @@ Process finished with the exit code 0
 
 # 6-5 传统同步机制
 
+传统同步机制
+
+- WaitGroup
+- Mutex
+- Cond
+
+## code0 init atomic
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type atomicInt int
+
+func (a *atomicInt) increment() {
+	*a++
+}
+func (a *atomicInt) get() int {
+	return int(*a)
+}
+
+func main() {
+	var a atomicInt
+	a.increment()
+	go func() {
+		a.increment()
+	}()
+	time.Sleep(time.Millisecond)
+	fmt.Println(a)
+}
+/**
+2
+
+Process finished with the exit code 0
+ */
+```
+
 
 
 # 6-6 并发模式（上）
