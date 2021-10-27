@@ -1,31 +1,3 @@
-
-
-
-# 7-1 迷宫_算法
-
-![1635333441923](README/1635333441923.png)
-
-![1635333456976](README/1635333456976.png)
-
-
-
-# 7-2 迷宫代码实现
-
-```txt
-6 5
-0 1 0 0 0
-0 0 0 1 0
-0 1 0 1 0
-1 1 1 0 0
-0 1 0 0 1
-0 1 0 0 0
-```
-
-
-
-
-
-```go
 package main
 
 import (
@@ -122,7 +94,7 @@ func walk(maze [][]int,
 }
 
 func main() {
-	maze := readMaze("lang/maze/maze.in")
+	maze := readMaze("maze/maze.in")
 
 	steps := walk(maze, point{0, 0},
 		point{len(maze) - 1, len(maze[0]) - 1})
@@ -136,6 +108,3 @@ func main() {
 
 	// TODO: construct path from steps
 }
-
-```
-
