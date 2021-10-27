@@ -66,26 +66,25 @@ func main() {
 /**
 Channel as first-class citizen
 @0---97
-@1---98
+@4---101
 @2---99
 @3---100
-@4---101
+@9---106
 @5---102
 @6---103
-@7---104
 @8---105
-@9---106
-@0---65
-@1---66
-@2---67
-@3---68
-@4---69
-@5---70
-@6---71
-@7---72
-@8---73
-@9---74
-truetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetrue
-Process finished with the exit code 0
+@7---104
+@1---98
+fatal error: all goroutines are asleep - deadlock!
+
+goroutine 1 [chan send]:
+main.chanDemo()
+	E:/Projects/GolandProjects/go-camp/mooc/code/learngo/channel/done/channel.go:45 +0x15d
+main.main()
+	E:/Projects/GolandProjects/go-camp/mooc/code/learngo/channel/done/channel.go:63 +0x57
+
+goroutine 6 [chan send]:
+
+
 
 */
