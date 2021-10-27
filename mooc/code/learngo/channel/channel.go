@@ -6,13 +6,8 @@ import (
 )
 
 func worker(id int, c chan int) {
-	for {
-		n, ok := <-c
-		if ok {
-			fmt.Printf("@%d---%d\n", id, n)
-		} else {
-			break
-		}
+	for n := range c {
+		fmt.Printf("@%d---%d\n", id, n)
 	}
 }
 
@@ -63,8 +58,9 @@ func bufferedChannel() {
 }
 
 func main() {
-	//chanDemo()
-	bufferedChannel()
+	fmt.Println("Channel as first-class citizen")
+	chanDemo()
+	//bufferedChannel()
 }
 
 /**

@@ -566,6 +566,19 @@ Process finished with the exit code 0
 
 
 
+```go
+func worker(id int, c chan int) {
+	for n := range c {
+		fmt.Printf("@%d---%d\n", id, n)
+	}
+}
+// 这样也可以
+```
+
+
+
+
+
 
 
 # 6-2 使用Channel等待任务结束
