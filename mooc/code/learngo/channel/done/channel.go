@@ -9,7 +9,9 @@ func doWork(id int, c chan int, done chan bool) {
 	for n := range c {
 		fmt.Printf("@%d---%d\n", id, n)
 		// 通知外面 做完了( channel 是一等公民)
-		done <- true
+		go func() {
+			done <- true
+		}()
 	}
 }
 
@@ -84,7 +86,6 @@ main.main()
 	E:/Projects/GolandProjects/go-camp/mooc/code/learngo/channel/done/channel.go:63 +0x57
 
 goroutine 6 [chan send]:
-
 
 
 */
