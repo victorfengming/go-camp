@@ -509,6 +509,61 @@ Process finished with the exit code 0
 
 
 
+## code10
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func worker(id int, c chan int) {
+	for {
+		n,ok := <-c
+		if ok{
+			fmt.Printf("@%d---%d\n", id,n)
+		}else{
+			break
+		}
+	}
+}
+
+
+func bufferedChannel() {
+	// 加上缓冲区,大小为3
+	c := make(chan int)
+	go worker(0, c)
+	c <- '1'
+	c <- '2'
+	c <- '3'
+	c <- 'd'
+	//c <- 4
+	close(c)
+	time.Sleep(time.Millisecond)
+
+}
+
+func main() {
+	//chanDemo()
+	bufferedChannel()
+}
+
+/**
+@0---49
+@0---50
+@0---51
+@0---100
+
+Process finished with the exit code 0
+
+*/
+
+```
+
+
+
 
 
 
