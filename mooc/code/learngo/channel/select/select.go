@@ -22,13 +22,10 @@ func generator() chan int {
 }
 
 func worker(id int, c chan int) {
-	for {
-		n, ok := <-c
-		if ok {
-			fmt.Printf("@%d---%d\n", id, n)
-		} else {
-			break
-		}
+	for n := range c {
+		time.Sleep(1 * time.Second)
+		fmt.Printf("@%d---%d\n", id, n)
+
 	}
 }
 
@@ -44,34 +41,59 @@ func main() {
 	var work = createWorker(0)
 
 	n := 0
-	hasValue := false
+	var values []int
+	tm := time.After(10 * time.Second)
+	tick := time.Tick(time.Second)
 	for {
 
 		var activeWorker chan<- int
-		if hasValue {
+		var activeValue int
+		if len(values) > 0 {
 			activeWorker = work
+			activeValue = values[0]
 		}
 		select {
 		case n = <-c1:
-			hasValue = true
+			values = append(values, n)
 		case n = <-c2:
-			hasValue = true
-		case activeWorker <- n:
-			hasValue = false
+			values = append(values, n)
+		case activeWorker <- activeValue:
+			values = values[1:]
+		case <-time.After(800 * time.Millisecond):
+			// 如果超过 800 毫秒 之内没有生成数据
+			fmt.Println("timeout")
+		case <-tick:
+			fmt.Println("queue len is", len(values))
+		case <-tm:
+			fmt.Println("bye")
+			return
 		}
 	}
 
 }
 
 /**
+queue len is 3
 @0---0
+queue len is 4
 @0---0
+queue len is 5
 @0---1
+queue len is 10
 @0---1
+queue len is 10
 @0---2
+queue len is 11
 @0---2
+queue len is 12
 @0---3
+queue len is 13
+@0---3
+queue len is 14
+@0---4
+queue len is 15
+bye
 
-Process finished with the exit code -1073741510 (0xC000013A: interrupted by Ctrl+C)
+Process finished with the exit code 0
 
 */
