@@ -1,7 +1,6 @@
-[[[]
+# 第8章_http及其他标准库
 
-
-# 8-1 http标准库
+## 8-1 http标准库
 
 ![1635335363928](README/1635335363928.png)
 
@@ -86,11 +85,11 @@ func main() {
 
 ![1635336328401](README/1635336328401.png)
 
-# 8-2 json数据格式的处理
+## 8-2 json数据格式的处理
 
 
 
-## +v格式化打印
+### +v格式化打印
 
 ```go
 package main
@@ -122,7 +121,7 @@ func main() {
 
 
 
-## 使用 json库 格式化库
+### 使用 json库 格式化库
 
 
 
@@ -160,7 +159,7 @@ func main() {
 
 ```
 
-## json字段
+### json字段
 
 ```go
 package main
@@ -202,7 +201,7 @@ func main() {
 
 
 
-## 省略空字段
+### 省略空字段
 
 
 
@@ -248,7 +247,7 @@ Process finished with the exit code 0
 
 
 
-## json 嵌套
+### json 嵌套
 
 ```go
 package main
@@ -311,7 +310,7 @@ func main() {
 
 
 
-## 指针也可以
+### 指针也可以
 
 ```go
 package main
@@ -370,7 +369,7 @@ func main() {
 
 ```
 
-## 切片也支持
+### 切片也支持
 
 
 
@@ -449,11 +448,11 @@ func main() {
 
 ![1635345615051](README/1635345615051.png)
 
-# 8-3 第三方API数据格式的解析技巧
+## 8-3 第三方API数据格式的解析技巧
 
 
 
-## map类型收 json
+### map类型收 json
 
 ```go
 package main
@@ -579,7 +578,7 @@ fmt.Printf("%+v\n",
 
 
 
-## 结构体收json
+### 结构体收json
 
 > 换成结构体的
 
@@ -603,8 +602,158 @@ err := json.Unmarshal([]byte(res), &m)
 
 
 
-# 8-4 gin框架介绍
+## 8-4 gin框架介绍
 
 
 
-# 8-5 为gin增加middleware
+
+## 8-5 为gin增加middleware
+
+
+
+- gin-
+
+### code 01 init
+
+```go
+package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+```
+
+
+
+### code 02 加中间件拦截
+
+```go
+package main
+
+import (
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+	"time"
+)
+
+func main() {
+	r := gin.Default()
+	logger, err := zap.NewProduction()
+	if err != nil {
+		panic(err)
+	}
+	// middleware
+	r.Use(func(c *gin.Context) {
+		s := time.Now()
+
+		c.Next()
+
+		// 不管访问什么,都能先进到这里面来
+		// log latency, response code
+		logger.Info("incoming request:",
+			zap.String("path", c.Request.URL.Path),
+			zap.Int("status", c.Writer.Status()),
+			zap.Duration("elapsed", time.Now().Sub(s)),
+		)
+		//log.Fatalf(c.Request.URL.Path)
+	})
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.GET("/hello", func(c *gin.Context) {
+		c.String(200, "hello gin")
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+```
+
+
+
+### code03 requestId生成
+
+
+
+```go
+package main
+
+import (
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+	"math/rand"
+	"time"
+)
+
+func main() {
+	r := gin.Default()
+	logger, err := zap.NewProduction()
+	if err != nil {
+		panic(err)
+	}
+	// middleware
+	r.Use(func(c *gin.Context) {
+		s := time.Now()
+
+		c.Next()
+
+		// 不管访问什么,都能先进到这里面来
+		// log latency, response code
+		logger.Info("incoming request:",
+			zap.String("path", c.Request.URL.Path),
+			zap.Int("status", c.Writer.Status()),
+			zap.Duration("elapsed", time.Now().Sub(s)),
+		)
+		//log.Fatalf(c.Request.URL.Path)
+	}, func(c *gin.Context) {
+		c.Set("requestId", rand.Int())
+		c.Next()
+	})
+	r.GET("/ping", func(c *gin.Context) {
+
+		h := gin.H{
+			"message": "pong",
+		}
+
+		if rid, exists := c.Get("requestId"); exists {
+			h["requestId"] = rid
+		}
+		c.JSON(200, h)
+	})
+	r.GET("/hello", func(c *gin.Context) {
+		c.String(200, "hello gin")
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
+}
+
+```
+
+
+
+
+
+- gin-gonic/gin
+- middleware的使用
+- context的使用
+
+
+
+
+## TODO For Blog
+
+
+
+写一个脚本实现gitee page 自动更新
+
+github page 自动同步
+
