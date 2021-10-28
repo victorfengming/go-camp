@@ -250,3 +250,111 @@ func file_trip_proto_init() {
 
 
 
+protobuf 的所有字段 都是可选的
+
+
+
+go中的零值
+
+
+
+omit empty
+
+
+
+动态增加字段,新老系统同时可用
+
+默认字段不填,填的是零值
+
+
+
+
+
+
+
+
+
+## grpc
+
+
+
+```shell
+protoc -I=E:\Projects\GolandProjects\go-camp\mooc\code\coolcar\server\proto --go_out=plugins=grpc,paths=source_relative:gen/go trip.proto
+```
+
+
+
+
+
+server
+
+
+
+```go
+package main
+
+import (
+	trippb "coolcar/proto/gen/go"
+	trip "coolcar/tripservice"
+	"google.golang.org/grpc"
+	"log"
+	"net"
+)
+
+func main() {
+	lis, err := net.Listen("tcp", ":8081")
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	s := grpc.NewServer()
+	trippb.RegisterTripServiceServer(s, &trip.Service{})
+	log.Fatal(s.Serve(lis))
+
+
+}
+
+```
+
+client
+
+
+
+```go
+
+package main
+
+import (
+	"context"
+	trippb "coolcar/proto/gen/go"
+	"fmt"
+	"google.golang.org/grpc"
+	"log"
+)
+
+func main() {
+	log.SetFlags(log.Lshortfile)
+	conn, err := grpc.Dial("localhost:8081",grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("cannot connect server: %v", err)
+
+	}
+
+	tsClient := trippb.NewTripServiceClient(conn)
+	r, err := tsClient.GetTrip(context.Background(), &trippb.GetTripRequest{
+		Id: "tr35653",
+	})
+	if err != nil {
+		log.Fatalf("can not call GetTrip : %v", err)
+	}
+
+	fmt.Println(r)
+}
+
+/**
+id:"tr35653"  trip:{start:"abc"  start_pos:{latitude:30  longitude:120}  end_pos:{latitude:30  longitude:120}  path_locaitons:{latitude:31  longitude:118}  path_locaitons:{latitude:37  longitude:125}  status:IN_PROGRESS  end:"def"  duration_sec:36000  fee_cent:13000}
+
+Process finished with the exit code 0
+ */
+```
+
