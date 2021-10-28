@@ -10,7 +10,7 @@
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于驾驶位置展示"
-    }
+    
   },
   "window": {
     "backgroundTextStyle": "light",
@@ -20,4 +20,4 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
-}
+}}
