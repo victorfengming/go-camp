@@ -1,0 +1,730 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第2章_初识微服务框架gRPC与protobuf · go-camp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Victor <victorfengming@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-ancre-navigation/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    
+        <link rel="shortcut icon" href='../../../img/avator.png.icon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../../../img/avator.png.icon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://victorfengming.gitee.io/index/gitbook/" target="_blank" class="custom-link">文档索引页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    README
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    阶段一_Go语言基础入门和编程思维
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    02_Go语言编程思想
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第3章_错误处理和资源管理/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第3章_错误处理和资源管理/">
+            
+                    
+                    第3章_错误处理和资源管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第4章_测试与性能调优/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第4章_测试与性能调优/">
+            
+                    
+                    第4章_测试与性能调优
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第5章_Goroutine/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第5章_Goroutine/">
+            
+                    
+                    第5章_Goroutine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第6章_Channel/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第6章_Channel/">
+            
+                    
+                    第6章_Channel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第7章_迷宫的广度优先搜索/">
+            
+                    
+                    第7章_迷宫的广度优先搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第8章_http及其他标准库/">
+            
+                <a href="../../../阶段一_Go语言基础入门和编程思维/02_Go语言编程思想/第8章_http及其他标准库/">
+            
+                    
+                    第8章_http及其他标准库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    阶段三租辆酷车共享出行产品设计与研发
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" >
+            
+                <span>
+            
+                    
+                    03租辆酷车后端接入微服务GRPC
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第2章_初识微服务框架gRPC与protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >第2章_初识微服务框架gRPC与protobuf</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id=""> </h1>
+<p><a href="README/1635407248225.png" data-lightbox="4a6c90d2-fc0a-4a88-accc-87cd062fbadb" data-title="1635407248225"><img src="README/1635407248225.png" alt="1635407248225"></a></p>
+<p><a href="README/1635407802820.png" data-lightbox="cd2b2cd1-833c-40db-bb6e-82e45757b949" data-title="1635407802820"><img src="README/1635407802820.png" alt="1635407802820"></a></p>
+<p><a href="README/1635407919172.png" data-lightbox="1e4eb25c-2624-46cc-86e6-dbab5cbe94be" data-title="1635407919172"><img src="README/1635407919172.png" alt="1635407919172"></a></p>
+<p><a href="README/1635407964946.png" data-lightbox="7fe66fdc-f0e5-4b10-ab0d-11b1eaed4b2e" data-title="1635407964946"><img src="README/1635407964946.png" alt="1635407964946"></a></p>
+<p><a href="README/1635407906702.png" data-lightbox="3a2bc992-a0e8-4b44-bf44-a0252e4689a7" data-title="1635407906702"><img src="README/1635407906702.png" alt="1635407906702"></a></p>
+<h2 id="protocol-buffer"><a name="protocol-buffer" class="anchor-navigation-ex-anchor" href="#protocol-buffer"><i class="fa fa-link" aria-hidden="true"></i></a>Protocol Buffer</h2>
+<p>trip.proto &#x6587;&#x4EF6;:</p>
+<pre class="language-"><code class="lang-proto">syntax = &quot;proto3&quot;;
+package coolcar;
+option go_package=&quot;server/proto/gen/go;trippb&quot;;
+
+message Trip{
+    string start = 1;   // &#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x662F; start
+    string end = 2;     // &#x7B2C;&#x4E8C;&#x4E2A;&#x5B57;&#x6BB5;&#x662F; end
+    int64 duration_sec = 3; // duration in second
+    int64 fee_cent = 4;
+}
+</code></pre>
+<pre class="language-"><code class="lang-cmd">protoc -I=. --go_out=path=source_relative:gen/go
+</code></pre>
+<pre class="language-"><code class="lang-cmd">protoc -I=E:\Projects\GolandProjects\go-camp\mooc\code\coolcar\server\proto --go_out=paths=source_relative:gen/go trip.proto
+</code></pre>
+<p>&#x7EC8;&#x4E8E;&#x751F;&#x6210;&#x51FA;&#x6765;&#x4E86;</p>
+<pre class="language-"><code class="lang-go"><span class="token comment">// Code generated by protoc-gen-go. DO NOT EDIT.</span>
+<span class="token comment">// versions:</span>
+<span class="token comment">//     protoc-gen-go v1.27.1</span>
+<span class="token comment">//     protoc        v3.13.0</span>
+<span class="token comment">// source: trip.proto</span>
+
+<span class="token keyword">package</span> trippb
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    protoreflect <span class="token string">&quot;google.golang.org/protobuf/reflect/protoreflect&quot;</span>
+    protoimpl <span class="token string">&quot;google.golang.org/protobuf/runtime/protoimpl&quot;</span>
+    reflect <span class="token string">&quot;reflect&quot;</span>
+    sync <span class="token string">&quot;sync&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">(</span>
+    <span class="token comment">// Verify that this generated code is sufficiently up-to-date.</span>
+    <span class="token boolean">_</span> <span class="token operator">=</span> protoimpl<span class="token punctuation">.</span><span class="token function">EnforceVersion</span><span class="token punctuation">(</span><span class="token number">20</span> <span class="token operator">-</span> protoimpl<span class="token punctuation">.</span>MinVersion<span class="token punctuation">)</span>
+    <span class="token comment">// Verify that runtime/protoimpl is sufficiently up-to-date.</span>
+    <span class="token boolean">_</span> <span class="token operator">=</span> protoimpl<span class="token punctuation">.</span><span class="token function">EnforceVersion</span><span class="token punctuation">(</span>protoimpl<span class="token punctuation">.</span>MaxVersion <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> Trip <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">// &#x5C0F;&#x5199;&#x7684;&#x4E0D;&#x7528;&#x7BA1;&#x5B83;</span>
+    state         protoimpl<span class="token punctuation">.</span>MessageState
+    sizeCache     protoimpl<span class="token punctuation">.</span>SizeCache
+    unknownFields protoimpl<span class="token punctuation">.</span>UnknownFields
+
+    <span class="token comment">// go &#x4F1A;&#x81EA;&#x52A8;&#x628A; _ &#x5206;&#x9694; &#x8F6C;&#x6210; &#x9A7C;&#x5CF0;&#x5417;&#x547D;&#x540D;</span>
+    Start       <span class="token builtin">string</span> <span class="token string">`protobuf:&quot;bytes,1,opt,name=start,proto3&quot; json:&quot;start,omitempty&quot;`</span>                                 <span class="token comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x662F; start</span>
+    End         <span class="token builtin">string</span> <span class="token string">`protobuf:&quot;bytes,2,opt,name=end,proto3&quot; json:&quot;end,omitempty&quot;`</span>                                     <span class="token comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x5B57;&#x6BB5;&#x662F; end</span>
+    DurationSec <span class="token builtin">int64</span>  <span class="token string">`protobuf:&quot;varint,3,opt,name=duration_sec,json=durationSec,proto3&quot; json:&quot;duration_sec,omitempty&quot;`</span> <span class="token comment">// duration in second</span>
+    FeeCent     <span class="token builtin">int64</span>  <span class="token string">`protobuf:&quot;varint,4,opt,name=fee_cent,json=feeCent,proto3&quot; json:&quot;fee_cent,omitempty&quot;`</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">*</span>x <span class="token operator">=</span> Trip<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">if</span> protoimpl<span class="token punctuation">.</span>UnsafeEnabled <span class="token punctuation">{</span>
+        mi <span class="token operator">:=</span> <span class="token operator">&amp;</span>file_trip_proto_msgTypes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        ms <span class="token operator">:=</span> protoimpl<span class="token punctuation">.</span>X<span class="token punctuation">.</span><span class="token function">MessageStateOf</span><span class="token punctuation">(</span>protoimpl<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        ms<span class="token punctuation">.</span><span class="token function">StoreMessageInfo</span><span class="token punctuation">(</span>mi<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> protoimpl<span class="token punctuation">.</span>X<span class="token punctuation">.</span><span class="token function">MessageStringOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">ProtoMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">ProtoReflect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> protoreflect<span class="token punctuation">.</span>Message <span class="token punctuation">{</span>
+    mi <span class="token operator">:=</span> <span class="token operator">&amp;</span>file_trip_proto_msgTypes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">if</span> protoimpl<span class="token punctuation">.</span>UnsafeEnabled <span class="token operator">&amp;&amp;</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        ms <span class="token operator">:=</span> protoimpl<span class="token punctuation">.</span>X<span class="token punctuation">.</span><span class="token function">MessageStateOf</span><span class="token punctuation">(</span>protoimpl<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> ms<span class="token punctuation">.</span><span class="token function">LoadMessageInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            ms<span class="token punctuation">.</span><span class="token function">StoreMessageInfo</span><span class="token punctuation">(</span>mi<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ms
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> mi<span class="token punctuation">.</span><span class="token function">MessageOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Deprecated: Use Trip.ProtoReflect.Descriptor instead.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">Descriptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">file_trip_proto_rawDescGZIP</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">GetStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">.</span>Start
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">GetEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">.</span>End
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">GetDurationSec</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">.</span>DurationSec
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>x <span class="token operator">*</span>Trip<span class="token punctuation">)</span> <span class="token function">GetFeeCent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">.</span>FeeCent
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> File_trip_proto protoreflect<span class="token punctuation">.</span>FileDescriptor
+
+<span class="token keyword">var</span> file_trip_proto_rawDesc <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">{</span>
+    <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x2e</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x07</span><span class="token punctuation">,</span> <span class="token number">0x63</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span>
+    <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x6c</span><span class="token punctuation">,</span> <span class="token number">0x63</span><span class="token punctuation">,</span> <span class="token number">0x61</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x22</span><span class="token punctuation">,</span> <span class="token number">0x6c</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x04</span><span class="token punctuation">,</span> <span class="token number">0x54</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x14</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span>
+    <span class="token number">0x05</span><span class="token punctuation">,</span> <span class="token number">0x73</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x61</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x28</span><span class="token punctuation">,</span> <span class="token number">0x09</span><span class="token punctuation">,</span> <span class="token number">0x52</span><span class="token punctuation">,</span> <span class="token number">0x05</span><span class="token punctuation">,</span> <span class="token number">0x73</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span>
+    <span class="token number">0x61</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x10</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x03</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x64</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0x02</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x28</span><span class="token punctuation">,</span> <span class="token number">0x09</span><span class="token punctuation">,</span>
+    <span class="token number">0x52</span><span class="token punctuation">,</span> <span class="token number">0x03</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x64</span><span class="token punctuation">,</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x21</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x0c</span><span class="token punctuation">,</span> <span class="token number">0x64</span><span class="token punctuation">,</span> <span class="token number">0x75</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x61</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span>
+    <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x5f</span><span class="token punctuation">,</span> <span class="token number">0x73</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x63</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0x03</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x28</span><span class="token punctuation">,</span> <span class="token number">0x03</span><span class="token punctuation">,</span> <span class="token number">0x52</span><span class="token punctuation">,</span> <span class="token number">0x0b</span><span class="token punctuation">,</span> <span class="token number">0x64</span><span class="token punctuation">,</span> <span class="token number">0x75</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span>
+    <span class="token number">0x61</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x53</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x63</span><span class="token punctuation">,</span> <span class="token number">0x12</span><span class="token punctuation">,</span> <span class="token number">0x19</span><span class="token punctuation">,</span> <span class="token number">0x0a</span><span class="token punctuation">,</span> <span class="token number">0x08</span><span class="token punctuation">,</span> <span class="token number">0x66</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x5f</span><span class="token punctuation">,</span>
+    <span class="token number">0x63</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0x04</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x01</span><span class="token punctuation">,</span> <span class="token number">0x28</span><span class="token punctuation">,</span> <span class="token number">0x03</span><span class="token punctuation">,</span> <span class="token number">0x52</span><span class="token punctuation">,</span> <span class="token number">0x07</span><span class="token punctuation">,</span> <span class="token number">0x66</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x43</span><span class="token punctuation">,</span>
+    <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x42</span><span class="token punctuation">,</span> <span class="token number">0x1c</span><span class="token punctuation">,</span> <span class="token number">0x5a</span><span class="token punctuation">,</span> <span class="token number">0x1a</span><span class="token punctuation">,</span> <span class="token number">0x73</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x76</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x2f</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span>
+    <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x2f</span><span class="token punctuation">,</span> <span class="token number">0x67</span><span class="token punctuation">,</span> <span class="token number">0x65</span><span class="token punctuation">,</span> <span class="token number">0x6e</span><span class="token punctuation">,</span> <span class="token number">0x2f</span><span class="token punctuation">,</span> <span class="token number">0x67</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x3b</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span>
+    <span class="token number">0x62</span><span class="token punctuation">,</span> <span class="token number">0x62</span><span class="token punctuation">,</span> <span class="token number">0x06</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x72</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x74</span><span class="token punctuation">,</span> <span class="token number">0x6f</span><span class="token punctuation">,</span> <span class="token number">0x33</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+    file_trip_proto_rawDescOnce sync<span class="token punctuation">.</span>Once
+    file_trip_proto_rawDescData <span class="token operator">=</span> file_trip_proto_rawDesc
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">file_trip_proto_rawDescGZIP</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token punctuation">{</span>
+    file_trip_proto_rawDescOnce<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span><span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        file_trip_proto_rawDescData <span class="token operator">=</span> protoimpl<span class="token punctuation">.</span>X<span class="token punctuation">.</span><span class="token function">CompressGZIP</span><span class="token punctuation">(</span>file_trip_proto_rawDescData<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> file_trip_proto_rawDescData
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> file_trip_proto_msgTypes <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>protoimpl<span class="token punctuation">.</span>MessageInfo<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> file_trip_proto_goTypes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token operator">*</span>Trip<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 0: coolcar.Trip</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> file_trip_proto_depIdxs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int32</span><span class="token punctuation">{</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// [0:0] is the sub-list for method output_type</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// [0:0] is the sub-list for method input_type</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// [0:0] is the sub-list for extension type_name</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// [0:0] is the sub-list for extension extendee</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// [0:0] is the sub-list for field type_name</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">file_trip_proto_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">file_trip_proto_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> File_trip_proto <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token operator">!</span>protoimpl<span class="token punctuation">.</span>UnsafeEnabled <span class="token punctuation">{</span>
+        file_trip_proto_msgTypes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Exporter <span class="token operator">=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>v <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> i <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>
+            <span class="token keyword">switch</span> v <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Trip<span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token operator">&amp;</span>v<span class="token punctuation">.</span>state
+            <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token operator">&amp;</span>v<span class="token punctuation">.</span>sizeCache
+            <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token operator">&amp;</span>v<span class="token punctuation">.</span>unknownFields
+            <span class="token keyword">default</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">nil</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">type</span> x <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    out <span class="token operator">:=</span> protoimpl<span class="token punctuation">.</span>TypeBuilder<span class="token punctuation">{</span>
+        File<span class="token punctuation">:</span> protoimpl<span class="token punctuation">.</span>DescBuilder<span class="token punctuation">{</span>
+            GoPackagePath<span class="token punctuation">:</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>x<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">PkgPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            RawDescriptor<span class="token punctuation">:</span> file_trip_proto_rawDesc<span class="token punctuation">,</span>
+            NumEnums<span class="token punctuation">:</span>      <span class="token number">0</span><span class="token punctuation">,</span>
+            NumMessages<span class="token punctuation">:</span>   <span class="token number">1</span><span class="token punctuation">,</span>
+            NumExtensions<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+            NumServices<span class="token punctuation">:</span>   <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        GoTypes<span class="token punctuation">:</span>           file_trip_proto_goTypes<span class="token punctuation">,</span>
+        DependencyIndexes<span class="token punctuation">:</span> file_trip_proto_depIdxs<span class="token punctuation">,</span>
+        MessageInfos<span class="token punctuation">:</span>      file_trip_proto_msgTypes<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    File_trip_proto <span class="token operator">=</span> out<span class="token punctuation">.</span>File
+    file_trip_proto_rawDesc <span class="token operator">=</span> <span class="token boolean">nil</span>
+    file_trip_proto_goTypes <span class="token operator">=</span> <span class="token boolean">nil</span>
+    file_trip_proto_depIdxs <span class="token operator">=</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>protobuf &#x7684;&#x6240;&#x6709;&#x5B57;&#x6BB5; &#x90FD;&#x662F;&#x53EF;&#x9009;&#x7684;</p>
+<p>go&#x4E2D;&#x7684;&#x96F6;&#x503C;</p>
+<p>omit empty</p>
+<p>&#x52A8;&#x6001;&#x589E;&#x52A0;&#x5B57;&#x6BB5;,&#x65B0;&#x8001;&#x7CFB;&#x7EDF;&#x540C;&#x65F6;&#x53EF;&#x7528;</p>
+<p>&#x9ED8;&#x8BA4;&#x5B57;&#x6BB5;&#x4E0D;&#x586B;,&#x586B;&#x7684;&#x662F;&#x96F6;&#x503C;</p>
+<h2 id="grpc"><a name="grpc" class="anchor-navigation-ex-anchor" href="#grpc"><i class="fa fa-link" aria-hidden="true"></i></a>grpc</h2>
+<pre class="language-"><code class="lang-shell">protoc -I=E:\Projects\GolandProjects\go-camp\mooc\code\coolcar\server\proto --go_out=plugins=grpc,paths=source_relative:gen/go trip.proto
+</code></pre>
+<p>server</p>
+<pre class="language-"><code class="lang-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    trippb <span class="token string">&quot;coolcar/proto/gen/go&quot;</span>
+    trip <span class="token string">&quot;coolcar/tripservice&quot;</span>
+    <span class="token string">&quot;google.golang.org/grpc&quot;</span>
+    <span class="token string">&quot;log&quot;</span>
+    <span class="token string">&quot;net&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    lis<span class="token punctuation">,</span> err <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">Listen</span><span class="token punctuation">(</span><span class="token string">&quot;tcp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;:8081&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">&quot;failed to listen: %v&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    s <span class="token operator">:=</span> grpc<span class="token punctuation">.</span><span class="token function">NewServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    trippb<span class="token punctuation">.</span><span class="token function">RegisterTripServiceServer</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token operator">&amp;</span>trip<span class="token punctuation">.</span>Service<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">Serve</span><span class="token punctuation">(</span>lis<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>client</p>
+<pre class="language-"><code class="lang-go">
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;context&quot;</span>
+    trippb <span class="token string">&quot;coolcar/proto/gen/go&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;google.golang.org/grpc&quot;</span>
+    <span class="token string">&quot;log&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">SetFlags</span><span class="token punctuation">(</span>log<span class="token punctuation">.</span>Lshortfile<span class="token punctuation">)</span>
+    conn<span class="token punctuation">,</span> err <span class="token operator">:=</span> grpc<span class="token punctuation">.</span><span class="token function">Dial</span><span class="token punctuation">(</span><span class="token string">&quot;localhost:8081&quot;</span><span class="token punctuation">,</span>grpc<span class="token punctuation">.</span><span class="token function">WithInsecure</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">&quot;cannot connect server: %v&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+
+    <span class="token punctuation">}</span>
+
+    tsClient <span class="token operator">:=</span> trippb<span class="token punctuation">.</span><span class="token function">NewTripServiceClient</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span>
+    r<span class="token punctuation">,</span> err <span class="token operator">:=</span> tsClient<span class="token punctuation">.</span><span class="token function">GetTrip</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>trippb<span class="token punctuation">.</span>GetTripRequest<span class="token punctuation">{</span>
+        Id<span class="token punctuation">:</span> <span class="token string">&quot;tr35653&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">&quot;can not call GetTrip : %v&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+id:&quot;tr35653&quot;  trip:{start:&quot;abc&quot;  start_pos:{latitude:30  longitude:120}  end_pos:{latitude:30  longitude:120}  path_locaitons:{latitude:31  longitude:118}  path_locaitons:{latitude:37  longitude:125}  status:IN_PROGRESS  end:&quot;def&quot;  duration_sec:36000  fee_cent:13000}
+
+Process finished with the exit code 0
+ */</span>
+</code></pre>
+<p></p><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz',appKey: 'nWerbwV2WMAxOEmAMkJKvXzs',placeholder: 'Just go go',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: false})</script> <p></p>
+<footer class="page-footer"><span class="copyright">victorfengming.gitee.io&#xFF0C;&#x4F7F;&#x7528;<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank">&#x7F72;&#x540D;4.0&#x56FD;&#x9645;(CC BY 4.0)&#x534F;&#x8BAE;</a>&#x53D1;&#x5E03; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6700;&#x540E;&#x66F4;&#x65B0;&#xFF1A;
+2021-10-28 23:50:00
+</span></footer></body></html>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第2章_初识微服务框架gRPC与protobuf","level":"1.3.1.1","depth":3,"previous":{"title":"03租辆酷车后端接入微服务GRPC","level":"1.3.1","depth":2,"ref":"","articles":[{"title":"第2章_初识微服务框架gRPC与protobuf","level":"1.3.1.1","depth":3,"path":"阶段三_租辆酷车_共享出行产品设计与研发/03_租辆酷车后端_接入微服务GRPC/第2章_初识微服务框架gRPC与protobuf/README.md","ref":"./阶段三_租辆酷车_共享出行产品设计与研发/03_租辆酷车后端_接入微服务GRPC/第2章_初识微服务框架gRPC与protobuf/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["code","valine","hide-element","chapter-fold","expandable-chapters","favicon","lightbox","splitter","-lunr","pageview-count","ancre-navigation","-search","search-plus","-highlight","popup","prism","prism-themes","-sharing","sharing-plus","tbfed-pagefooter","toolbar-button"],"root":"./note","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"victorfengming.gitee.io，使用<a href='https://creativecommons.org/licenses/by/4.0/deed.zh'>署名4.0国际(CC BY 4.0)协议</a>发布","modify_label":"最后更新：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"toolbar-button":{"label":"下载PDF","url":"https://victorfengming.gitee.io/go-camp/","icon":"fa-file-pdf-o"},"splitter":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"./img/avator.png.icon.ico","bookmark":"./img/avator.png.icon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"pageview-count":{},"prism-themes":{},"ancre-navigation":{"showLevel":true,"associatedWithSummary":true,"mode":"float","printLog":false,"multipleH1":true,"float":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""},"pageTop":{"showLevelIcon":false,"level1Icon":"","level2Icon":"","level3Icon":""}},"sharing":{"qq":true,"all":["douban","facebook","google","instapaper","line","linkedin","messenger","pocket","qq","qzone","stumbleupon","twitter","viber","vk","weibo","whatsapp"],"douban":false,"facebook":false,"weibo":true,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":true,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{},"valine":{"placeholder":"Just go go","avatar":"","pageSize":10,"lang":"zh-CN","recordIP":false,"appId":"CHjATxRcQrXst8eJrdwX0vjz-gzGzoHsz","appKey":"nWerbwV2WMAxOEmAMkJKvXzs"},"search-plus":{}},"theme":"default","author":"Victor <victorfengming@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"go-camp","language":"zh-hans","links":{"sidebar":{"文档索引页":"https://victorfengming.gitee.io/index/gitbook/"}},"gitbook":"3.2.3","description":"go-camp,golang训练营"},"file":{"path":"阶段三_租辆酷车_共享出行产品设计与研发/03_租辆酷车后端_接入微服务GRPC/第2章_初识微服务框架gRPC与protobuf/README.md","mtime":"2021-10-28T15:50:00.116Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-28T16:00:33.234Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-toolbar-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
