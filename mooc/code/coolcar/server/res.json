@@ -1,0 +1,24 @@
+{
+    "start": "abc",
+    "start_pos": {
+        "latitude": 30,
+        "longitude": 120
+    },
+    "end_pos": {
+        "latitude": 30,
+        "longitude": 120
+    },
+    "path_locaitons": [
+        {
+            "latitude": 31,
+            "longitude": 118
+        },
+        {
+            "latitude": 37,
+            "longitude": 125
+        }
+    ],
+    "end": "def",
+    "duration_sec": 36000,
+    "fee_cent": 13000
+}
