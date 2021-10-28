@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"math/rand"
 	"time"
 )
 
@@ -13,6 +14,7 @@ func main() {
 		panic(err)
 	}
 	// middleware
+	const keyRequestId = "requestId"
 	r.Use(func(c *gin.Context) {
 		s := time.Now()
 
@@ -26,11 +28,20 @@ func main() {
 			zap.Duration("elapsed", time.Now().Sub(s)),
 		)
 		//log.Fatalf(c.Request.URL.Path)
+	}, func(c *gin.Context) {
+		c.Set(keyRequestId, rand.Int())
+		c.Next()
 	})
 	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+
+		h := gin.H{
 			"message": "pong",
-		})
+		}
+
+		if rid, exists := c.Get(keyRequestId); exists {
+			h[keyRequestId] = rid
+		}
+		c.JSON(200, h)
 	})
 	r.GET("/hello", func(c *gin.Context) {
 		c.String(200, "hello gin")
