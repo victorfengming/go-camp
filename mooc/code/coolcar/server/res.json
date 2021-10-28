@@ -18,6 +18,7 @@
             "longitude": 125
         }
     ],
+    "Status": 2,
     "end": "def",
     "duration_sec": 36000,
     "fee_cent": 13000

@@ -31,7 +31,8 @@ func main() {
 				Latitude:37,
 				Longitude: 125,
 			},
-		},
+		}, 
+		Status:trippb.TripStaus_IN_PROGRESS,
 	}
 
 	fmt.Println(&trip)

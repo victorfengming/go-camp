@@ -8,11 +8,20 @@ message Location{
     double longitude = 2;
 }
 
+enum TripStaus{
+    TS_NOT_SPECIFIED = 0;
+    NOT_STARTED = 1;
+    IN_PROGRESS = 2;
+    FINISHED = 3;
+    PAID = 4;
+}
+
 message Trip{
     string start = 1;   // 第一个字段是 start
     Location start_pos = 5; // 第5个字段  而不是按照 写的顺序来的
     Location end_pos = 6; // 第5个字段  而不是按照 写的顺序来的
     repeated Location path_locaitons = 7;   // repeated 一般用复数形式
+    TripStaus Status = 8;
     string end = 2;     // 第二个字段是 end
     int64 duration_sec = 3; // duration in second
     int64 fee_cent = 4;
